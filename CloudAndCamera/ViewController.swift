@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  CloudAndCamera
-//
-//  Created by Aditya Narayan on 6/7/17.
-//  Copyright © 2017 George Correa. All rights reserved.
-//
-
 import UIKit
 
 class ViewController: UIViewController {
