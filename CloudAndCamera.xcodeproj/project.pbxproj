@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		A9E522A2860616ED1787BBEB /* Pods_CloudAndCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B097F1717F39674242BA5F52 /* Pods_CloudAndCamera.framework */; };
 		AA57362F1EE861670076D64A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA57362E1EE861670076D64A /* AppDelegate.swift */; };
-		AA5736311EE861670076D64A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5736301EE861670076D64A /* ViewController.swift */; };
 		AA5736341EE861670076D64A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5736321EE861670076D64A /* Main.storyboard */; };
 		AA5736361EE861670076D64A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA5736351EE861670076D64A /* Assets.xcassets */; };
 		AA5736391EE861670076D64A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5736371EE861670076D64A /* LaunchScreen.storyboard */; };
 		AA5736411EE87FAF0076D64A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA5736401EE87FAF0076D64A /* GoogleService-Info.plist */; };
+		AACBCB9A1EE897AA006B80AD /* CollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACBCB991EE897AA006B80AD /* CollectionVC.swift */; };
+		AACBCB9C1EE897BD006B80AD /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACBCB9B1EE897BD006B80AD /* DetailVC.swift */; };
+		AACBCB9E1EE897DB006B80AD /* LibraryAndCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACBCB9D1EE897DB006B80AD /* LibraryAndCameraVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,12 +23,14 @@
 		56A9407676418E66944D1A64 /* Pods-CloudAndCamera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudAndCamera.release.xcconfig"; path = "Pods/Target Support Files/Pods-CloudAndCamera/Pods-CloudAndCamera.release.xcconfig"; sourceTree = "<group>"; };
 		AA57362B1EE861670076D64A /* CloudAndCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudAndCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA57362E1EE861670076D64A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AA5736301EE861670076D64A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AA5736331EE861670076D64A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AA5736351EE861670076D64A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA5736381EE861670076D64A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA57363A1EE861670076D64A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA5736401EE87FAF0076D64A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AACBCB991EE897AA006B80AD /* CollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionVC.swift; sourceTree = "<group>"; };
+		AACBCB9B1EE897BD006B80AD /* DetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		AACBCB9D1EE897DB006B80AD /* LibraryAndCameraVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAndCameraVC.swift; sourceTree = "<group>"; };
 		B097F1717F39674242BA5F52 /* Pods_CloudAndCamera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloudAndCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -81,7 +85,9 @@
 			isa = PBXGroup;
 			children = (
 				AA57362E1EE861670076D64A /* AppDelegate.swift */,
-				AA5736301EE861670076D64A /* ViewController.swift */,
+				AACBCB991EE897AA006B80AD /* CollectionVC.swift */,
+				AACBCB9B1EE897BD006B80AD /* DetailVC.swift */,
+				AACBCB9D1EE897DB006B80AD /* LibraryAndCameraVC.swift */,
 				AA5736321EE861670076D64A /* Main.storyboard */,
 				AA5736351EE861670076D64A /* Assets.xcassets */,
 				AA5736371EE861670076D64A /* LaunchScreen.storyboard */,
@@ -216,8 +222,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA5736311EE861670076D64A /* ViewController.swift in Sources */,
+				AACBCB9A1EE897AA006B80AD /* CollectionVC.swift in Sources */,
+				AACBCB9E1EE897DB006B80AD /* LibraryAndCameraVC.swift in Sources */,
 				AA57362F1EE861670076D64A /* AppDelegate.swift in Sources */,
+				AACBCB9C1EE897BD006B80AD /* DetailVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +393,7 @@
 				AA57363F1EE861670076D64A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
