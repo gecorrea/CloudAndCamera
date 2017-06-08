@@ -9,8 +9,6 @@ class LibraryAndCameraVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        cameraButton.setTitle("Photo", for: .normal)
     }
 
     override func didReceiveMemoryWarning() {
