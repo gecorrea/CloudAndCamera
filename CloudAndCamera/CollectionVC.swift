@@ -56,6 +56,11 @@ class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         if let currentCell = collectionView.cellForItem(at: indexPath) as? CustomCell {
             detailVC.detailImage = currentCell.cellImageView.image
         }
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        backItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        navigationItem.backBarButtonItem = backItem
         navigationController?.pushViewController(detailVC, animated: true)
     }
     

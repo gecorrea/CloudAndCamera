@@ -1,27 +1,33 @@
 import UIKit
 
-class DetailVC: UIViewController, UITextFieldDelegate {
+class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var commentTextField: UITextField!
-    
     @IBOutlet weak var sendButton: UIButton!
-    
     @IBOutlet weak var commentViewBottomConstraint: NSLayoutConstraint!
-
-    
     @IBOutlet weak var textFieldTrailingConstraint: NSLayoutConstraint!
-    
     var detailImage: UIImage!
+    var comments = ["1"]
+    @IBOutlet weak var likeButton: UIButton!
+    var numberOfLikes = 0
+    @IBOutlet weak var likesLabel: UILabel!
+    var imageName = "icn_like"
+    @IBOutlet weak var commentView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.bringSubview(toFront: commentView)
+    
 
         imageView.image = detailImage
         imageView.contentMode = .scaleAspectFill
-//        self.view.sendSubview(toBack: imageView)
         commentTextField.delegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
+        likesLabel.text = "\(numberOfLikes) likes"
     }
     
     // Start Editing The Text Field
@@ -40,13 +46,12 @@ class DetailVC: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    // Move the text field in a pretty animation!
+    // Move the text field animated
     func moveTextField(_ textField: UITextField, moveDistance: Int, up: Bool) {
         let moveDuration = 0.3
         let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
         
         UIView.animate(withDuration: moveDuration) { () -> Void in
-//            self.commentTextField.frame = self.commentTextField.frame.offsetBy(dx: 0, dy: movement + 25)
             self.commentViewBottomConstraint.constant += movement
             if up == true {
                 self.textFieldTrailingConstraint.constant += 65
@@ -56,29 +61,49 @@ class DetailVC: UIViewController, UITextFieldDelegate {
                 self.textFieldTrailingConstraint.constant -= 65
                 self.sendButton.isHidden = true
             }
-//            self.view.bringSubview(toFront: self.commentTextField)
             self.view.layoutIfNeeded()
         }
-        
-        
-        
-//        UIView.beginAnimations("animateTextField", context: nil)
-//        UIView.setAnimationBeginsFromCurrentState(true)
-//        UIView.setAnimationDuration(moveDuration)
-//        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-//        UIView.commitAnimations()
-//        
-//        UIView.animate(withDuration: 2.0, animations: { () -> Void in
-//            self.titleLabel.center.y = self.titleLabel.center.y - 100
-//            self.loginButton.center.y = self.loginButton.center.y + 250
-//            self.view.backgroundColor = .gray
-//            self.picShareToolbar.isHidden = false
-//        })
+
     }
     
     // Handle hiding the keyboard.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return comments.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CustomTableViewCell
+        cell.userName.text = "Name"
+        cell.comment.text = "Say something."
+        
+        return cell
+    }
 
+    @IBAction func likeButtonPushed(_ sender: Any) {
+        if (imageName.isEqual( "icn_like"))  {
+            likeButton.setImage(UIImage(named: "active_like"), for: .normal)
+            imageName = "active"
+            numberOfLikes += 1
+            setNumberOfLikesText()
+        }
+        else {
+            likeButton.setImage(UIImage(named: "icn_like"), for: .normal)
+            imageName = "icn_like"
+            numberOfLikes -= 1
+            setNumberOfLikesText()
+        }
+    }
+    
+    func setNumberOfLikesText() {
+        if numberOfLikes == 1 {
+            likesLabel.text = "\(numberOfLikes) like"
+        }
+        else {
+            likesLabel.text = "\(numberOfLikes) likes"
+        }
+    }
 }
