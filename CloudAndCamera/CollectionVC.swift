@@ -54,7 +54,7 @@ class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
         if let currentCell = collectionView.cellForItem(at: indexPath) as? CustomCell {
-            detailVC.imageView.image = currentCell.cellImageView.image
+            detailVC.detailImage = currentCell.cellImageView.image
         }
         navigationController?.pushViewController(detailVC, animated: true)
     }
