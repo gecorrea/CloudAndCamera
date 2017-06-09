@@ -33,6 +33,9 @@
                                         <inset key="titleEdgeInsets" minX="-150" minY="150" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="130" minY="-25" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Take Photo" image="btn_takephoto_optimized_151x134"/>
+                                        <connections>
+                                            <action selector="cameraButtonPushed:" destination="AvH-Nn-xXP" eventType="touchUpInside" id="WhB-E2-bMG"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="emc-Zi-uTW">
                                         <rect key="frame" x="0.0" y="279.5" width="375" height="274.5"/>
@@ -41,6 +44,9 @@
                                         <inset key="titleEdgeInsets" minX="-150" minY="150" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="130" minY="-25" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Upload Photo" image="btn_uploadphoto"/>
+                                        <connections>
+                                            <action selector="libraryButtonPushed:" destination="AvH-Nn-xXP" eventType="touchUpInside" id="OYH-Rd-GD1"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
