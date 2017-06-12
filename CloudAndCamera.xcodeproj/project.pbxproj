@@ -15,6 +15,9 @@
 		AA5736391EE861670076D64A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5736371EE861670076D64A /* LaunchScreen.storyboard */; };
 		AA5736411EE87FAF0076D64A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA5736401EE87FAF0076D64A /* GoogleService-Info.plist */; };
 		AA67907C1EEB41D500369BF4 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA67907B1EEB41D500369BF4 /* CustomTableViewCell.swift */; };
+		AA97651E1EEEF35100BBC54B /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA97651D1EEEF35100BBC54B /* DAO.swift */; };
+		AA9765201EEF292000BBC54B /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA97651F1EEF292000BBC54B /* SignInVC.swift */; };
+		AA9765221EEF2E2500BBC54B /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9765211EEF2E2500BBC54B /* SignUpVC.swift */; };
 		AACBCB9A1EE897AA006B80AD /* CollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACBCB991EE897AA006B80AD /* CollectionVC.swift */; };
 		AACBCB9C1EE897BD006B80AD /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACBCB9B1EE897BD006B80AD /* DetailVC.swift */; };
 		AACBCB9E1EE897DB006B80AD /* LibraryAndCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACBCB9D1EE897DB006B80AD /* LibraryAndCameraVC.swift */; };
@@ -32,6 +35,9 @@
 		AA57363A1EE861670076D64A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA5736401EE87FAF0076D64A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AA67907B1EEB41D500369BF4 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		AA97651D1EEEF35100BBC54B /* DAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
+		AA97651F1EEF292000BBC54B /* SignInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
+		AA9765211EEF2E2500BBC54B /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		AACBCB991EE897AA006B80AD /* CollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionVC.swift; sourceTree = "<group>"; };
 		AACBCB9B1EE897BD006B80AD /* DetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		AACBCB9D1EE897DB006B80AD /* LibraryAndCameraVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAndCameraVC.swift; sourceTree = "<group>"; };
@@ -92,8 +98,11 @@
 				AACBCB991EE897AA006B80AD /* CollectionVC.swift */,
 				AA3E96691EE9E7A00094EA9E /* CustomCell.swift */,
 				AA67907B1EEB41D500369BF4 /* CustomTableViewCell.swift */,
+				AA97651D1EEEF35100BBC54B /* DAO.swift */,
 				AACBCB9B1EE897BD006B80AD /* DetailVC.swift */,
 				AACBCB9D1EE897DB006B80AD /* LibraryAndCameraVC.swift */,
+				AA97651F1EEF292000BBC54B /* SignInVC.swift */,
+				AA9765211EEF2E2500BBC54B /* SignUpVC.swift */,
 				AA5736321EE861670076D64A /* Main.storyboard */,
 				AA5736351EE861670076D64A /* Assets.xcassets */,
 				AA5736371EE861670076D64A /* LaunchScreen.storyboard */,
@@ -228,7 +237,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA97651E1EEEF35100BBC54B /* DAO.swift in Sources */,
+				AA9765221EEF2E2500BBC54B /* SignUpVC.swift in Sources */,
 				AA67907C1EEB41D500369BF4 /* CustomTableViewCell.swift in Sources */,
+				AA9765201EEF292000BBC54B /* SignInVC.swift in Sources */,
 				AACBCB9A1EE897AA006B80AD /* CollectionVC.swift in Sources */,
 				AACBCB9E1EE897DB006B80AD /* LibraryAndCameraVC.swift in Sources */,
 				AA3E966A1EE9E7A00094EA9E /* CustomCell.swift in Sources */,

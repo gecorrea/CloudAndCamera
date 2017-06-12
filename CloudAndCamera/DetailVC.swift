@@ -20,8 +20,6 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         super.viewDidLoad()
         
         self.view.bringSubview(toFront: commentView)
-    
-
         imageView.image = detailImage
         imageView.contentMode = .scaleAspectFill
         commentTextField.delegate = self
