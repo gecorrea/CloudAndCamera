@@ -168,7 +168,7 @@
                                             <color key="titleColor" red="0.99049308160000005" green="1" blue="0.97879085690000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="59i-GH-H77" kind="presentation" id="AHR-bn-hnt"/>
+                                            <action selector="signUp:" destination="WCf-oU-cZT" eventType="touchUpInside" id="15k-GV-JjW"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -211,6 +211,7 @@
                         <outlet property="emailTextField" destination="2Kh-y7-yUI" id="8Za-bd-8aw"/>
                         <outlet property="passwordTextField" destination="fBD-Mc-QMI" id="MD4-dY-RIl"/>
                         <outlet property="profileImage" destination="Tau-85-oqe" id="1sz-8G-JKj"/>
+                        <outlet property="signUpButton" destination="7sR-gg-pD5" id="ahW-Gm-zhK"/>
                         <outlet property="userNameTextField" destination="hrg-a7-6Od" id="1ia-Jp-Znx"/>
                     </connections>
                 </viewController>
@@ -230,7 +231,4 @@
     <resources>
         <image name="users_2" width="128" height="128"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="AHR-bn-hnt"/>
-    </inferredMetricsTieBreakers>
 </document>
