@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Photo Library-->
+        <scene sceneID="Sae-bG-PX1">
+            <objects>
+                <viewController storyboardIdentifier="LibraryAndCameraVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AvH-Nn-xXP" customClass="LibraryAndCameraVC" customModule="CloudAndCamera" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AQ0-4P-U85"/>
+                        <viewControllerLayoutGuide type="bottom" id="TMA-df-WMR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4jj-40-pgr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Wkt-yl-OzO">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ewr-Yw-Op9">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="274.5"/>
+                                        <color key="backgroundColor" red="0.80405622720718384" green="0.64192181825637817" blue="0.381733238697052" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                        <inset key="titleEdgeInsets" minX="-150" minY="150" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="130" minY="-25" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Take Photo" image="btn_takephoto_optimized_151x134"/>
+                                        <connections>
+                                            <action selector="cameraButtonPushed:" destination="AvH-Nn-xXP" eventType="touchUpInside" id="WhB-E2-bMG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="emc-Zi-uTW">
+                                        <rect key="frame" x="0.0" y="279.5" width="375" height="274.5"/>
+                                        <color key="backgroundColor" red="0.85656338930130005" green="0.82485491037368774" blue="0.36763429641723633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                        <inset key="titleEdgeInsets" minX="-150" minY="150" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="130" minY="-25" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Upload Photo" image="btn_uploadphoto"/>
+                                        <connections>
+                                            <action selector="libraryButtonPushed:" destination="AvH-Nn-xXP" eventType="touchUpInside" id="OYH-Rd-GD1"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ewr-Yw-Op9" firstAttribute="top" secondItem="Wkt-yl-OzO" secondAttribute="top" id="2Qh-v7-eo5"/>
+                                    <constraint firstItem="ewr-Yw-Op9" firstAttribute="leading" secondItem="Wkt-yl-OzO" secondAttribute="leading" id="J7m-b1-HzC"/>
+                                    <constraint firstAttribute="bottom" secondItem="emc-Zi-uTW" secondAttribute="bottom" id="RB9-km-v8s"/>
+                                    <constraint firstItem="ewr-Yw-Op9" firstAttribute="width" secondItem="emc-Zi-uTW" secondAttribute="width" multiplier="1:1" id="eCs-qe-z98"/>
+                                    <constraint firstAttribute="trailing" secondItem="ewr-Yw-Op9" secondAttribute="trailing" id="flN-4K-EPs"/>
+                                    <constraint firstAttribute="trailing" secondItem="emc-Zi-uTW" secondAttribute="trailing" id="hhZ-JA-ZMI"/>
+                                    <constraint firstItem="emc-Zi-uTW" firstAttribute="leading" secondItem="Wkt-yl-OzO" secondAttribute="leading" id="r1L-ty-edj"/>
+                                    <constraint firstItem="ewr-Yw-Op9" firstAttribute="height" secondItem="emc-Zi-uTW" secondAttribute="height" multiplier="1:1" id="zxg-GA-5Qc"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="TMA-df-WMR" firstAttribute="top" secondItem="Wkt-yl-OzO" secondAttribute="bottom" id="KL5-Cc-2d4"/>
+                            <constraint firstItem="Wkt-yl-OzO" firstAttribute="leading" secondItem="4jj-40-pgr" secondAttribute="leading" id="QSl-cL-LaV"/>
+                            <constraint firstAttribute="trailing" secondItem="Wkt-yl-OzO" secondAttribute="trailing" id="bck-r5-tVv"/>
+                            <constraint firstItem="Wkt-yl-OzO" firstAttribute="top" secondItem="AQ0-4P-U85" secondAttribute="bottom" id="nM2-3e-zeB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Photo Library" id="cgA-cu-gJl"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics">
+                        <color key="barTintColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="0.0" colorSpace="calibratedRGB"/>
+                    </simulatedTabBarMetrics>
+                    <connections>
+                        <outlet property="cameraButton" destination="ewr-Yw-Op9" id="K2V-zc-ISJ"/>
+                        <outlet property="libraryButton" destination="emc-Zi-uTW" id="6Hh-ix-quo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0WX-Re-u0E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="609" y="417"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3h3-ak-VRR">
+            <objects>
+                <navigationController storyboardIdentifier="NavigationCamera" automaticallyAdjustsScrollViewInsets="NO" id="gBO-gi-aej" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="inactive-cam" selectedImage="active-cam" id="Soa-Yj-Zjj">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics">
+                        <color key="barTintColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="0.0" colorSpace="calibratedRGB"/>
+                    </simulatedTabBarMetrics>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RIC-md-rPH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.43921568630000002" green="0.4431372549" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="AvH-Nn-xXP" kind="relationship" relationship="rootViewController" id="0yr-Uo-fUr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="65N-ep-xCd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-295" y="417"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="active-cam" width="32" height="32"/>
+        <image name="btn_takephoto_optimized_151x134" width="151" height="115"/>
+        <image name="btn_uploadphoto" width="151" height="134"/>
+        <image name="inactive-cam" width="32" height="32"/>
+    </resources>
+</document>

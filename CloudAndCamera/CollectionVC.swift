@@ -51,7 +51,7 @@ class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // handle tap events
         print("You selected cell #\(indexPath.item)!")
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
         if let currentCell = collectionView.cellForItem(at: indexPath) as? CustomCell {
             detailVC.detailImage = currentCell.cellImageView.image
@@ -62,30 +62,6 @@ class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         backItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
         navigationItem.backBarButtonItem = backItem
         navigationController?.pushViewController(detailVC, animated: true)
-    }
-    
-    
-    // Function to set color using Hex String
-    func hexStringToUIColor (hex:String) -> UIColor {
-        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-        
-        if (cString.hasPrefix("#")) {
-            cString.remove(at: cString.startIndex)
-        }
-        
-        if ((cString.characters.count) != 6) {
-            return UIColor.gray
-        }
-        
-        var rgbValue:UInt32 = 0
-        Scanner(string: cString).scanHexInt32(&rgbValue)
-        
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
     }
 
 }

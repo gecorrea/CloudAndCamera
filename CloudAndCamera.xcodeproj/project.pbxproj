@@ -18,6 +18,9 @@
 		AA97651E1EEEF35100BBC54B /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA97651D1EEEF35100BBC54B /* DAO.swift */; };
 		AA9765201EEF292000BBC54B /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA97651F1EEF292000BBC54B /* SignInVC.swift */; };
 		AA9765221EEF2E2500BBC54B /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9765211EEF2E2500BBC54B /* SignUpVC.swift */; };
+		AA9765251EF0377F00BBC54B /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA9765231EF0377F00BBC54B /* Start.storyboard */; };
+		AA9765271EF03B8600BBC54B /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA9765261EF03B8600BBC54B /* Home.storyboard */; };
+		AA97652A1EF03D2700BBC54B /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA9765281EF03D2700BBC54B /* Camera.storyboard */; };
 		AACBCB9A1EE897AA006B80AD /* CollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACBCB991EE897AA006B80AD /* CollectionVC.swift */; };
 		AACBCB9C1EE897BD006B80AD /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACBCB9B1EE897BD006B80AD /* DetailVC.swift */; };
 		AACBCB9E1EE897DB006B80AD /* LibraryAndCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACBCB9D1EE897DB006B80AD /* LibraryAndCameraVC.swift */; };
@@ -38,6 +41,9 @@
 		AA97651D1EEEF35100BBC54B /* DAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
 		AA97651F1EEF292000BBC54B /* SignInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		AA9765211EEF2E2500BBC54B /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		AA9765241EF0377F00BBC54B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Start.storyboard; sourceTree = "<group>"; };
+		AA9765261EF03B8600BBC54B /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		AA9765291EF03D2700BBC54B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Camera.storyboard; sourceTree = "<group>"; };
 		AACBCB991EE897AA006B80AD /* CollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionVC.swift; sourceTree = "<group>"; };
 		AACBCB9B1EE897BD006B80AD /* DetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		AACBCB9D1EE897DB006B80AD /* LibraryAndCameraVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAndCameraVC.swift; sourceTree = "<group>"; };
@@ -103,7 +109,10 @@
 				AACBCB9D1EE897DB006B80AD /* LibraryAndCameraVC.swift */,
 				AA97651F1EEF292000BBC54B /* SignInVC.swift */,
 				AA9765211EEF2E2500BBC54B /* SignUpVC.swift */,
+				AA9765231EF0377F00BBC54B /* Start.storyboard */,
 				AA5736321EE861670076D64A /* Main.storyboard */,
+				AA9765261EF03B8600BBC54B /* Home.storyboard */,
+				AA9765281EF03D2700BBC54B /* Camera.storyboard */,
 				AA5736351EE861670076D64A /* Assets.xcassets */,
 				AA5736371EE861670076D64A /* LaunchScreen.storyboard */,
 				AA57363A1EE861670076D64A /* Info.plist */,
@@ -176,7 +185,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA5736391EE861670076D64A /* LaunchScreen.storyboard in Resources */,
+				AA97652A1EF03D2700BBC54B /* Camera.storyboard in Resources */,
 				AA5736411EE87FAF0076D64A /* GoogleService-Info.plist in Resources */,
+				AA9765251EF0377F00BBC54B /* Start.storyboard in Resources */,
+				AA9765271EF03B8600BBC54B /* Home.storyboard in Resources */,
 				AA5736361EE861670076D64A /* Assets.xcassets in Resources */,
 				AA5736341EE861670076D64A /* Main.storyboard in Resources */,
 			);
@@ -266,6 +278,22 @@
 				AA5736381EE861670076D64A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		AA9765231EF0377F00BBC54B /* Start.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA9765241EF0377F00BBC54B /* Base */,
+			);
+			name = Start.storyboard;
+			sourceTree = "<group>";
+		};
+		AA9765281EF03D2700BBC54B /* Camera.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA9765291EF03D2700BBC54B /* Base */,
+			);
+			name = Camera.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
