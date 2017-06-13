@@ -101,24 +101,40 @@
 			isa = PBXGroup;
 			children = (
 				AA57362E1EE861670076D64A /* AppDelegate.swift */,
-				AACBCB991EE897AA006B80AD /* CollectionVC.swift */,
 				AA3E96691EE9E7A00094EA9E /* CustomCell.swift */,
 				AA67907B1EEB41D500369BF4 /* CustomTableViewCell.swift */,
 				AA97651D1EEEF35100BBC54B /* DAO.swift */,
-				AACBCB9B1EE897BD006B80AD /* DetailVC.swift */,
-				AACBCB9D1EE897DB006B80AD /* LibraryAndCameraVC.swift */,
-				AA97651F1EEF292000BBC54B /* SignInVC.swift */,
-				AA9765211EEF2E2500BBC54B /* SignUpVC.swift */,
-				AA9765231EF0377F00BBC54B /* Start.storyboard */,
-				AA5736321EE861670076D64A /* Main.storyboard */,
-				AA9765261EF03B8600BBC54B /* Home.storyboard */,
-				AA9765281EF03D2700BBC54B /* Camera.storyboard */,
+				AAB182891EF051C6002FB431 /* ViewControllers */,
+				AAB182881EF051A6002FB431 /* Storyboards */,
 				AA5736351EE861670076D64A /* Assets.xcassets */,
 				AA5736371EE861670076D64A /* LaunchScreen.storyboard */,
 				AA57363A1EE861670076D64A /* Info.plist */,
 				AA5736401EE87FAF0076D64A /* GoogleService-Info.plist */,
 			);
 			path = CloudAndCamera;
+			sourceTree = "<group>";
+		};
+		AAB182881EF051A6002FB431 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				AA9765231EF0377F00BBC54B /* Start.storyboard */,
+				AA5736321EE861670076D64A /* Main.storyboard */,
+				AA9765261EF03B8600BBC54B /* Home.storyboard */,
+				AA9765281EF03D2700BBC54B /* Camera.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		AAB182891EF051C6002FB431 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				AACBCB991EE897AA006B80AD /* CollectionVC.swift */,
+				AACBCB9B1EE897BD006B80AD /* DetailVC.swift */,
+				AACBCB9D1EE897DB006B80AD /* LibraryAndCameraVC.swift */,
+				AA97651F1EEF292000BBC54B /* SignInVC.swift */,
+				AA9765211EEF2E2500BBC54B /* SignUpVC.swift */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

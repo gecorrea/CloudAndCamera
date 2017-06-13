@@ -26,7 +26,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ovO-Ma-nqQ">
                                 <rect key="frame" x="20" y="261.5" width="335" height="144"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IsE-Tt-JmJ">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IsE-Tt-JmJ">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="FLi-Xg-Wmq"/>
@@ -35,7 +35,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mN2-OX-EbA">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mN2-OX-EbA">
                                         <rect key="frame" x="0.0" y="50" width="335" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Ms5-To-sgX"/>
@@ -108,9 +108,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="andLabel" destination="UDa-cZ-Y6S" id="wB3-r8-fcu"/>
-                        <outlet property="cameraLabel" destination="Lm6-ml-Ib1" id="pSn-6H-koI"/>
-                        <outlet property="cloudLabel" destination="PqI-E6-ZVR" id="Car-6n-Vou"/>
+                        <outlet property="emailTextField" destination="IsE-Tt-JmJ" id="gPC-V5-7P0"/>
+                        <outlet property="passwordTextField" destination="mN2-OX-EbA" id="PSU-H0-qnf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="drN-me-ypC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -132,7 +131,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="z16-hp-e9W">
                                 <rect key="frame" x="20" y="236.5" width="335" height="194"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hrg-a7-6Od">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="User Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hrg-a7-6Od">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="ff8-qz-8Wq"/>
@@ -141,7 +140,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Kh-y7-yUI">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Kh-y7-yUI">
                                         <rect key="frame" x="0.0" y="50" width="335" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="QJ5-Mz-pQg"/>
@@ -150,7 +149,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fBD-Mc-QMI">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fBD-Mc-QMI">
                                         <rect key="frame" x="0.0" y="100" width="335" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="NvP-Ie-9Yq"/>
@@ -183,11 +182,12 @@
                                     <color key="titleColor" red="0.99049308160000005" green="1" blue="0.97879085690000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="dismissSignUp:" destination="WCf-oU-cZT" eventType="touchUpInside" id="EHB-f5-5AJ"/>
+                                    <action selector="alreadyUser:" destination="WCf-oU-cZT" eventType="touchUpInside" id="XMl-Vk-TB4"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="users_2" translatesAutoresizingMaskIntoConstraints="NO" id="Tau-85-oqe">
                                 <rect key="frame" x="137" y="74" width="100" height="100"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Tau-85-oqe" secondAttribute="height" multiplier="1:1" id="KgC-G4-1Wf"/>
                                     <constraint firstAttribute="width" constant="100" id="v6p-uq-gaD"/>
@@ -207,6 +207,12 @@
                             <constraint firstItem="o7q-1X-Iau" firstAttribute="leading" secondItem="AMH-ty-qSR" secondAttribute="leading" id="vht-NA-bY2"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="2Kh-y7-yUI" id="8Za-bd-8aw"/>
+                        <outlet property="passwordTextField" destination="fBD-Mc-QMI" id="MD4-dY-RIl"/>
+                        <outlet property="profileImage" destination="Tau-85-oqe" id="1sz-8G-JKj"/>
+                        <outlet property="userNameTextField" destination="hrg-a7-6Od" id="1ia-Jp-Znx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dr4-V7-yAB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
