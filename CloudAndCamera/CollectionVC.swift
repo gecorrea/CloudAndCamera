@@ -1,4 +1,5 @@
 import UIKit
+import FirebaseAuth
 
 class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -64,4 +65,16 @@ class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         navigationController?.pushViewController(detailVC, animated: true)
     }
 
+    @IBAction func logOut(_ sender: UIBarButtonItem) {
+        do {
+            try Auth.auth().signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
+        
+        let storyboard = UIStoryboard(name: "Start", bundle: nil)
+        let signInVC = storyboard.instantiateViewController(withIdentifier: "SignInVC")
+        
+        self.present(signInVC, animated: true, completion: nil)
+    }
 }

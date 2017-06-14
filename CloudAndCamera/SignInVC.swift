@@ -8,7 +8,7 @@ class SignInVC: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     var validEmail: String!
     var validPassword: String!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.backgroundColor = UIColor.clear
@@ -19,7 +19,7 @@ class SignInVC: UIViewController {
         emailBottomLayer.frame = CGRect(x: 0, y: 29, width: 1000, height: 0.6)
         emailBottomLayer.backgroundColor = UIColor.white.cgColor
         emailTextField.layer.addSublayer(emailBottomLayer)
-
+        
         passwordTextField.backgroundColor = UIColor.clear
         passwordTextField.tintColor = UIColor.white
         passwordTextField.textColor = UIColor.white
@@ -28,13 +28,21 @@ class SignInVC: UIViewController {
         passwordBottomLayer.frame = CGRect(x: 0, y: 29, width: 1000, height: 0.6)
         passwordBottomLayer.backgroundColor = UIColor.white.cgColor
         passwordTextField.layer.addSublayer(passwordBottomLayer)
-        
+        signInButton.isEnabled = false
         handleTextField()
     }
-
+    
+    // If the user does not log out, they will automatically login the next time they open the app.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if Auth.auth().currentUser != nil {
+            self.performSegue(withIdentifier: "signInToTabBatVC", sender: nil)
+        }
+    }
+    
     func handleTextField() {
-        emailTextField.addTarget(self, action: #selector(SignUpVC.textFieldDidChange), for: UIControlEvents.editingChanged)
-        passwordTextField.addTarget(self, action: #selector(SignUpVC.textFieldDidChange), for: UIControlEvents.editingChanged)
+        emailTextField.addTarget(self, action: #selector(SignInVC.textFieldDidChange), for: UIControlEvents.editingChanged)
+        passwordTextField.addTarget(self, action: #selector(SignInVC.textFieldDidChange), for: UIControlEvents.editingChanged)
     }
     
     func textFieldDidChange () {
@@ -48,7 +56,7 @@ class SignInVC: UIViewController {
         signInButton.isEnabled = true
         signInButton.setTitleColor(UIColor.white, for: .normal)
     }
-
+    
     // Method called when sign in button is pressed.
     @IBAction func signIn(_ sender: UIButton) {
         if let tempEmail = emailTextField.text {
@@ -57,12 +65,10 @@ class SignInVC: UIViewController {
         if let tempPassword = passwordTextField.text {
             self.validPassword = tempPassword
         }
-        Auth.auth().signIn(withEmail: validEmail, password: validPassword) { (user, error) in
-            if error != nil{
-                print(error!.localizedDescription)
-                return
-            }
+        AuthServices.signIn(email: validEmail, password: validPassword, onSuccess: {
             self.performSegue(withIdentifier: "signInToTabBatVC", sender: nil)
-        }
+        }, onError: {error in
+            print(error!)
+        })
     }
 }

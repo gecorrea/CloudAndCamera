@@ -69,7 +69,13 @@
                             <constraint firstItem="Ohb-La-7Ik" firstAttribute="leading" secondItem="aAq-u6-Fa8" secondAttribute="leading" id="oVY-ax-BMy"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Moments" id="fEG-fm-WbX"/>
+                    <navigationItem key="navigationItem" title="Moments" id="fEG-fm-WbX">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="9we-OI-jCO">
+                            <connections>
+                                <action selector="logOut:" destination="JMg-0V-c8b" id="1r5-AY-8No"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics">
                         <color key="barTintColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="0.0" colorSpace="calibratedRGB"/>
                     </simulatedTabBarMetrics>

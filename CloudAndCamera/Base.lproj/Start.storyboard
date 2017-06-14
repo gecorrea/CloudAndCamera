@@ -14,7 +14,7 @@
         <!--Sign InVC-->
         <scene sceneID="fi8-IL-Iiw">
             <objects>
-                <viewController id="Iq8-gN-ki3" customClass="SignInVC" customModule="CloudAndCamera" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInVC" id="Iq8-gN-ki3" customClass="SignInVC" customModule="CloudAndCamera" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ybI-DQ-6h8"/>
                         <viewControllerLayoutGuide type="bottom" id="ja7-qt-7k7"/>
@@ -235,6 +235,6 @@
         <image name="users_2" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OkL-sL-i34"/>
+        <segue reference="6Gf-3N-NxV"/>
     </inferredMetricsTieBreakers>
 </document>
