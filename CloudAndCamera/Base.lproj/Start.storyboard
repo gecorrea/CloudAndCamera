@@ -54,7 +54,7 @@
                                             <color key="titleColor" red="0.99049308158005034" green="1" blue="0.9787908568710213" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="59i-GH-H77" kind="presentation" id="iTm-aH-ma0"/>
+                                            <action selector="signIn:" destination="Iq8-gN-ki3" eventType="touchUpInside" id="VFo-D7-Z8C"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -110,6 +110,8 @@
                     <connections>
                         <outlet property="emailTextField" destination="IsE-Tt-JmJ" id="gPC-V5-7P0"/>
                         <outlet property="passwordTextField" destination="mN2-OX-EbA" id="PSU-H0-qnf"/>
+                        <outlet property="signInButton" destination="TjP-OZ-YnQ" id="PQm-z9-Q36"/>
+                        <segue destination="59i-GH-H77" kind="presentation" identifier="signInToTabBatVC" id="6Gf-3N-NxV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="drN-me-ypC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -213,6 +215,7 @@
                         <outlet property="profileImage" destination="Tau-85-oqe" id="1sz-8G-JKj"/>
                         <outlet property="signUpButton" destination="7sR-gg-pD5" id="ahW-Gm-zhK"/>
                         <outlet property="userNameTextField" destination="hrg-a7-6Od" id="1ia-Jp-Znx"/>
+                        <segue destination="59i-GH-H77" kind="presentation" identifier="signUpToTabBatV" id="OkL-sL-i34"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dr4-V7-yAB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -231,4 +234,7 @@
     <resources>
         <image name="users_2" width="128" height="128"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="OkL-sL-i34"/>
+    </inferredMetricsTieBreakers>
 </document>

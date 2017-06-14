@@ -10,9 +10,9 @@ class SignUpVC: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var signUpButton: UIButton!
-    var userName: String!
-    var email: String!
-    var password: String!
+    var validUsername: String!
+    var validEmail: String!
+    var validPassword: String!
     
     var selectedImage: UIImage?
 
@@ -63,7 +63,7 @@ class SignUpVC: UIViewController {
     }
     
     func textFieldDidChange () {
-        guard let username = userNameTextField.text, !userName.isEmpty,
+        guard let username = userNameTextField.text, !username.isEmpty,
             let email = emailTextField.text, !email.isEmpty,
             let password = passwordTextField.text, !password.isEmpty
         else{
@@ -85,17 +85,18 @@ class SignUpVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    // Method called when sign up button is pressed.
     @IBAction func signUp(_ sender: UIButton) {
         if let tempUserName = userNameTextField.text {
-            self.userName = tempUserName
+            self.validUsername = tempUserName
         }
         if let tempEmail = emailTextField.text {
-            self.email = tempEmail
+            self.validEmail = tempEmail
         }
         if let tempPassword = passwordTextField.text {
-            self.password = tempPassword
+            self.validPassword = tempPassword
         }
-        Auth.auth().createUser(withEmail: email, password: password) { (user: User?, error: Error?) in
+        Auth.auth().createUser(withEmail: validEmail, password: validPassword) { (user: User?, error: Error?) in
             if error != nil {
                 print(error!.localizedDescription)
             }
@@ -106,16 +107,22 @@ class SignUpVC: UIViewController {
                     if error != nil {
                         return
                     }
-                    // Save new username, email, and profileImage to firebase storage.
-                    let profileImageURL = metadata?.downloadURL()?.absoluteString
-                    let ref = Database.database().reference()
-                    let userRef = ref.child("users")
-                    let newUserRef = userRef.child(uid!)
-                    newUserRef.setValue(["username": self.userName, "email": self.email, "profileImageURL": profileImageURL])
+                    if let profileImageURL = metadata?.downloadURL()?.absoluteString {
+                        self.setUserInfo(profileImageURL: profileImageURL, username: self.validUsername, email: self.validEmail, uid: uid!)
+                    }
                 })
             }
             
         }
+    }
+    
+    // Save new username, email, and profileImage to firebase storage.
+    func setUserInfo (profileImageURL: String, username: String, email: String, uid: String) {
+        let ref = Database.database().reference()
+        let userRef = ref.child("users")
+        let newUserRef = userRef.child(uid)
+        newUserRef.setValue(["username": username, "email": email, "profileImageURL": profileImageURL])
+        self.performSegue(withIdentifier: "signUpToTabBatVC", sender: nil)
     }
 }
 
