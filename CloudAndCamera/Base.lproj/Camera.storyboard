@@ -108,6 +108,14 @@
             </objects>
             <point key="canvasLocation" x="-295" y="417"/>
         </scene>
+        <!--ShareVC-->
+        <scene sceneID="Yex-0r-mo8">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="ShareVC" storyboardName="Share" referencedIdentifier="ShareVC" id="XOD-8A-QYl" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pUa-P4-n16" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1442" y="417"/>
+        </scene>
     </scenes>
     <resources>
         <image name="active-cam" width="32" height="32"/>

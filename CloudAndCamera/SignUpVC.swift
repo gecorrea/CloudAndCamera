@@ -49,17 +49,22 @@ class SignUpVC: UIViewController {
         profileImage.layer.cornerRadius = profileImage.frame.size.height/2
         profileImage.clipsToBounds = true
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(SignUpVC.handleSelectedProfileImageView))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleSelectedProfileImageView))
         profileImage.addGestureRecognizer(tapGesture)
         profileImage.isUserInteractionEnabled = true
         signUpButton.isEnabled = false
         handleTextField()
     }
     
+    // Dismiss keyboard if the user touches outside of it.
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     func handleTextField() {
-        userNameTextField.addTarget(self, action: #selector(SignUpVC.textFieldDidChange), for: UIControlEvents.editingChanged)
-        emailTextField.addTarget(self, action: #selector(SignUpVC.textFieldDidChange), for: UIControlEvents.editingChanged)
-        passwordTextField.addTarget(self, action: #selector(SignUpVC.textFieldDidChange), for: UIControlEvents.editingChanged)
+        userNameTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
+        emailTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
+        passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
     }
     
     func textFieldDidChange () {
@@ -87,6 +92,7 @@ class SignUpVC: UIViewController {
     
     // Method called when sign up button is pressed.
     @IBAction func signUp(_ sender: UIButton) {
+        view.endEditing(true)
         if let tempUserName = userNameTextField.text {
             self.validUsername = tempUserName
         }
@@ -97,17 +103,18 @@ class SignUpVC: UIViewController {
             self.validPassword = tempPassword
         }
         if let profileImg = self.selectedImage, let imageData = UIImageJPEGRepresentation(profileImg, 0.1) {
+            ProgressHUD.show("Please wait...", interaction: false)
             AuthServices.signUp(username: validUsername, email: validEmail, password: validPassword, imageData: imageData, onSuccess: {
+                ProgressHUD.showSuccess("Welcome!")
                 self.performSegue(withIdentifier: "signUpToTabBatVC", sender: nil)
             }, onError: { error in
-                print(error!)
+                ProgressHUD.showError(error!)
             })
         }
         else {
-            
+            ProgressHUD.showError("Please set a profile image.")
         }
     }
-    
     
 }
 

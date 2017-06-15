@@ -1,6 +1,7 @@
 import UIKit
+import FirebaseDatabase
 
-class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
@@ -9,7 +10,7 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     @IBOutlet weak var commentViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldTrailingConstraint: NSLayoutConstraint!
     var detailImage: UIImage!
-    var comments = ["1"]
+    var comments = [Comment]()
     @IBOutlet weak var likeButton: UIButton!
     var numberOfLikes = 0
     @IBOutlet weak var likesLabel: UILabel!
@@ -19,13 +20,28 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadPosts()
+        
+//        var post = Comment.init(captionString: "test", photoUrlString: "urlTest")
+        
         self.view.bringSubview(toFront: commentView)
         imageView.image = detailImage
-        imageView.contentMode = .scaleAspectFill
         commentTextField.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         likesLabel.text = "\(numberOfLikes) likes"
+    }
+    
+    func loadPosts() {
+        Database.database().reference().child("posts").observe(.childAdded) { (snaphot: DataSnapshot) in
+            if let dict = snaphot.value as? [String: Any] {
+                let captionText = dict["caption"] as! String
+                let photoUrlString = dict["phtotUrl"] as! String
+                let post = Comment(captionString: captionText, photoUrlString: photoUrlString)
+                self.comments.append(post)
+                self.tableView.reloadData()
+            }
+        }
     }
     
     // Start Editing The Text Field
@@ -69,17 +85,7 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         self.view.endEditing(true)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return comments.count
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CustomTableViewCell
-        cell.userName.text = "Name"
-        cell.comment.text = "Say something."
-        
-        return cell
-    }
 
     @IBAction func likeButtonPushed(_ sender: Any) {
         if (imageName.isEqual( "icn_like"))  {
@@ -103,5 +109,19 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         else {
             likesLabel.text = "\(numberOfLikes) likes"
         }
+    }
+}
+
+extension DetailVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return comments.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CustomTableViewCell
+        cell.userName.text = "Name"
+        cell.comment.text = comments[indexPath.row].caption
+        
+        return cell
     }
 }

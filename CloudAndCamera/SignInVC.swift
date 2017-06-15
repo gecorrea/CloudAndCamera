@@ -32,6 +32,11 @@ class SignInVC: UIViewController {
         handleTextField()
     }
     
+    // Dismiss keyboard if the user touches outside of it.
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     // If the user does not log out, they will automatically login the next time they open the app.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -41,8 +46,8 @@ class SignInVC: UIViewController {
     }
     
     func handleTextField() {
-        emailTextField.addTarget(self, action: #selector(SignInVC.textFieldDidChange), for: UIControlEvents.editingChanged)
-        passwordTextField.addTarget(self, action: #selector(SignInVC.textFieldDidChange), for: UIControlEvents.editingChanged)
+        emailTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
+        passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
     }
     
     func textFieldDidChange () {
@@ -59,16 +64,19 @@ class SignInVC: UIViewController {
     
     // Method called when sign in button is pressed.
     @IBAction func signIn(_ sender: UIButton) {
+        view.endEditing(true)
         if let tempEmail = emailTextField.text {
             self.validEmail = tempEmail
         }
         if let tempPassword = passwordTextField.text {
             self.validPassword = tempPassword
         }
+        ProgressHUD.show("Please wait...", interaction: false)
         AuthServices.signIn(email: validEmail, password: validPassword, onSuccess: {
+            ProgressHUD.showSuccess("Welcome!")
             self.performSegue(withIdentifier: "signInToTabBatVC", sender: nil)
         }, onError: {error in
-            print(error!)
+            ProgressHUD.showError(error!)
         })
     }
 }

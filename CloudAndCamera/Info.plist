@@ -22,6 +22,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Cloud and Camera would like to access your camera.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Cloud and Camera would like to access your microphone for video.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Cloud and Camera would like to access your photo library.</string>
 	<key>UILaunchStoryboardName</key>
