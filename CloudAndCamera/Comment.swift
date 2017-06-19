@@ -1,11 +1,12 @@
 import Foundation
 
 class Comment{
+    var user: String
     var caption: String
-    var photoUrl: String
+
     
-    init(captionString: String, photoUrlString: String) {
+    init(userString: String, captionString: String) {
+        user = userString
         caption = captionString
-        photoUrl = photoUrlString
     }
 }

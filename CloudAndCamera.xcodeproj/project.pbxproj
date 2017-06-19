@@ -10,28 +10,28 @@
 		A9E522A2860616ED1787BBEB /* Pods_CloudAndCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B097F1717F39674242BA5F52 /* Pods_CloudAndCamera.framework */; };
 		AA3E966A1EE9E7A00094EA9E /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3E96691EE9E7A00094EA9E /* CustomCell.swift */; };
 		AA57362F1EE861670076D64A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA57362E1EE861670076D64A /* AppDelegate.swift */; };
-		AA5736341EE861670076D64A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5736321EE861670076D64A /* Main.storyboard */; };
 		AA5736361EE861670076D64A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA5736351EE861670076D64A /* Assets.xcassets */; };
-		AA5736391EE861670076D64A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5736371EE861670076D64A /* LaunchScreen.storyboard */; };
 		AA5736411EE87FAF0076D64A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA5736401EE87FAF0076D64A /* GoogleService-Info.plist */; };
 		AA67907C1EEB41D500369BF4 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA67907B1EEB41D500369BF4 /* CustomTableViewCell.swift */; };
 		AA97651E1EEEF35100BBC54B /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA97651D1EEEF35100BBC54B /* DAO.swift */; };
 		AA9765201EEF292000BBC54B /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA97651F1EEF292000BBC54B /* SignInVC.swift */; };
 		AA9765221EEF2E2500BBC54B /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9765211EEF2E2500BBC54B /* SignUpVC.swift */; };
-		AA9765251EF0377F00BBC54B /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA9765231EF0377F00BBC54B /* Start.storyboard */; };
 		AA9765271EF03B8600BBC54B /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA9765261EF03B8600BBC54B /* Home.storyboard */; };
-		AA97652A1EF03D2700BBC54B /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA9765281EF03D2700BBC54B /* Camera.storyboard */; };
 		AAB1828D1EF1D992002FB431 /* AuthServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB1828C1EF1D992002FB431 /* AuthServices.swift */; };
 		AAB1828F1EF1EB68002FB431 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB1828E1EF1EB68002FB431 /* Config.swift */; };
 		AAB182941EF2D7EA002FB431 /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AAB182911EF2D7EA002FB431 /* ProgressHUD.bundle */; };
 		AAB182951EF2D7EA002FB431 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB182931EF2D7EA002FB431 /* ProgressHUD.m */; };
 		AAB182971EF2E9EE002FB431 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAB182961EF2E9EE002FB431 /* Detail.storyboard */; };
 		AAB1829B1EF3186D002FB431 /* ShareVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB1829A1EF3186D002FB431 /* ShareVC.swift */; };
-		AAB1829E1EF3244B002FB431 /* Share.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAB1829C1EF3244B002FB431 /* Share.storyboard */; };
 		AAB182A51EF33631002FB431 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB182A41EF33631002FB431 /* Comment.swift */; };
 		AACBCB9A1EE897AA006B80AD /* CollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACBCB991EE897AA006B80AD /* CollectionVC.swift */; };
 		AACBCB9C1EE897BD006B80AD /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACBCB9B1EE897BD006B80AD /* DetailVC.swift */; };
 		AACBCB9E1EE897DB006B80AD /* LibraryAndCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACBCB9D1EE897DB006B80AD /* LibraryAndCameraVC.swift */; };
+		AAF269531EF816BE001A8037 /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA9765231EF0377F00BBC54B /* Start.storyboard */; };
+		AAF269541EF816C6001A8037 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5736321EE861670076D64A /* Main.storyboard */; };
+		AAF269551EF816CB001A8037 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA9765281EF03D2700BBC54B /* Camera.storyboard */; };
+		AAF269561EF816D1001A8037 /* Share.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAB1829C1EF3244B002FB431 /* Share.storyboard */; };
+		AAF269571EF816D7001A8037 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5736371EE861670076D64A /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -237,16 +237,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAF269571EF816D7001A8037 /* LaunchScreen.storyboard in Resources */,
+				AAF269561EF816D1001A8037 /* Share.storyboard in Resources */,
+				AAF269551EF816CB001A8037 /* Camera.storyboard in Resources */,
+				AAF269541EF816C6001A8037 /* Main.storyboard in Resources */,
+				AAF269531EF816BE001A8037 /* Start.storyboard in Resources */,
 				AAB182941EF2D7EA002FB431 /* ProgressHUD.bundle in Resources */,
-				AA5736391EE861670076D64A /* LaunchScreen.storyboard in Resources */,
 				AAB182971EF2E9EE002FB431 /* Detail.storyboard in Resources */,
-				AA97652A1EF03D2700BBC54B /* Camera.storyboard in Resources */,
 				AA5736411EE87FAF0076D64A /* GoogleService-Info.plist in Resources */,
-				AA9765251EF0377F00BBC54B /* Start.storyboard in Resources */,
-				AAB1829E1EF3244B002FB431 /* Share.storyboard in Resources */,
 				AA9765271EF03B8600BBC54B /* Home.storyboard in Resources */,
 				AA5736361EE861670076D64A /* Assets.xcassets in Resources */,
-				AA5736341EE861670076D64A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +467,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 32BC334AEBE948F5E81A2DFD /* Pods-CloudAndCamera.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 5P88HHTNS2;
@@ -484,6 +485,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 56A9407676418E66944D1A64 /* Pods-CloudAndCamera.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 5P88HHTNS2;

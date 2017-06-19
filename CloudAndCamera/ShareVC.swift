@@ -1,6 +1,7 @@
 import UIKit
 import FirebaseStorage
 import FirebaseDatabase
+import FirebaseAuth
 
 class ShareVC: UIViewController {
     
@@ -8,7 +9,7 @@ class ShareVC: UIViewController {
     @IBOutlet weak var captionTextView: UITextView!
     @IBOutlet weak var shareButton: UIButton!
     var shareImage: UIImage!
-    
+    var username: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,20 +44,39 @@ class ShareVC: UIViewController {
     }
     
     func sendDataToDatabase(photoUrl: String) {
+        let uID = Auth.auth().currentUser!.uid
+        
+        var username = String()
+        //let user = Database.database().reference().child("users").child(uID).value(forKey: "username")
         let ref = Database.database().reference()
-        let postsRef = ref.child("posts")
-        let newPostID = postsRef.childByAutoId().key
-        let newPostRef = postsRef.child(newPostID)
-        newPostRef.setValue(["photoUrl": photoUrl, "caption": captionTextView.text!]) { (error, ref) in
-            if error != nil {
-                ProgressHUD.showError(error?.localizedDescription)
-                return
+        
+        ref.child("users").child(uID).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            username = value?["username"] as? String ?? ""
+            print(username)
+            
+            let postsRef = ref.child("posts")
+            let newPostID = postsRef.childByAutoId().key
+            let newPostRef = postsRef.child(newPostID)
+            newPostRef.setValue(["photoUrl": photoUrl, "caption": self.captionTextView.text!, "user": username]) { (error, ref) in
+                if error != nil {
+                    ProgressHUD.showError(error?.localizedDescription)
+                    return
+                }
+                ProgressHUD.showSuccess("Thanks for sharing a post!")
+                self.shareImage = nil
+                self.navigationController?.popViewController(animated: true)
+                self.tabBarController?.selectedIndex = 0
             }
-            ProgressHUD.showSuccess("Thanks for sharing a post!")
-            self.shareImage = nil
-            self.navigationController?.popViewController(animated: true)
-            self.tabBarController?.selectedIndex = 0
+
+            
+            // ...
+        }) { (error) in
+            print(error.localizedDescription)
         }
+        
+        
     }
     
 }

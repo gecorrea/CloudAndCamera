@@ -106,7 +106,7 @@ class SignUpVC: UIViewController {
             ProgressHUD.show("Please wait...", interaction: false)
             AuthServices.signUp(username: validUsername, email: validEmail, password: validPassword, imageData: imageData, onSuccess: {
                 ProgressHUD.showSuccess("Welcome!")
-                self.performSegue(withIdentifier: "signUpToTabBatVC", sender: nil)
+                self.performSegue(withIdentifier: "signUpToTabBarVC", sender: nil)
             }, onError: { error in
                 ProgressHUD.showError(error!)
             })

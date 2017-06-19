@@ -41,7 +41,7 @@ class SignInVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if Auth.auth().currentUser != nil {
-            self.performSegue(withIdentifier: "signInToTabBatVC", sender: nil)
+            self.performSegue(withIdentifier: "signInToTabBarVC", sender: nil)
         }
     }
     
@@ -74,7 +74,7 @@ class SignInVC: UIViewController {
         ProgressHUD.show("Please wait...", interaction: false)
         AuthServices.signIn(email: validEmail, password: validPassword, onSuccess: {
             ProgressHUD.showSuccess("Welcome!")
-            self.performSegue(withIdentifier: "signInToTabBatVC", sender: nil)
+            self.performSegue(withIdentifier: "signInToTabBarVC", sender: nil)
         }, onError: {error in
             ProgressHUD.showError(error!)
         })

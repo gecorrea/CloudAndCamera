@@ -16,6 +16,7 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
     @IBOutlet weak var likesLabel: UILabel!
     var imageName = "icn_like"
     @IBOutlet weak var commentView: UIView!
+    var postIDKey: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,14 +34,24 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
     }
     
     func loadPosts() {
-        Database.database().reference().child("posts").observe(.childAdded) { (snaphot: DataSnapshot) in
-            if let dict = snaphot.value as? [String: Any] {
-                let captionText = dict["caption"] as! String
-                let photoUrlString = dict["phtotUrl"] as! String
-                let post = Comment(captionString: captionText, photoUrlString: photoUrlString)
-                self.comments.append(post)
-                self.tableView.reloadData()
+        Database.database().reference().child("posts").observe(.childAdded) { (snapshot: DataSnapshot) in
+            if snapshot.key == self.postIDKey {
+                if let dict = snapshot.value as? [String: Any] {
+                    let userText = dict["user"] as! String
+                    let captionText = dict["caption"] as! String
+                    let post = Comment(userString: userText, captionString: captionText)
+                    self.comments.append(post)
+                    self.tableView.reloadData()
+                }
             }
+//                if self.chosenPhotoUrlString == photoUrlString {
+//                    let captionText = dict["caption"] as! String
+//                }
+//                let captionText = dict["caption"] as! String
+//                let post = Comment(captionString: captionText, photoUrlString: photoUrlString)
+//                self.comments.append(post)
+            
+//            }
         }
     }
     
@@ -119,7 +130,7 @@ extension DetailVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CustomTableViewCell
-        cell.userName.text = "Name"
+        cell.userName.text = comments[indexPath.row].user
         cell.comment.text = comments[indexPath.row].caption
         
         return cell
