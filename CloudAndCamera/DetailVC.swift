@@ -1,5 +1,4 @@
 import UIKit
-import FirebaseDatabase
 
 class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, RefreshViewDelegate {
 
@@ -10,7 +9,6 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, Refr
     @IBOutlet weak var commentViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldTrailingConstraint: NSLayoutConstraint!
     var detailImage: UIImage!
-    var comments = [Comment]()
     @IBOutlet weak var likeButton: UIButton!
     var numberOfLikes = 0
     @IBOutlet weak var likesLabel: UILabel!
@@ -72,8 +70,6 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, Refr
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
-    
 
     @IBAction func likeButtonPushed(_ sender: Any) {
         if (imageName.isEqual( "icn_like"))  {
@@ -106,13 +102,13 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, Refr
 
 extension DetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return comments.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CustomTableViewCell
-        cell.userName.text = comments[indexPath.row].user
-        cell.comment.text = comments[indexPath.row].caption
+        cell.userName.text = dataManager.comments[dataManager.selectedItemIndex].user
+        cell.comment.text = dataManager.comments[dataManager.selectedItemIndex].caption
         
         return cell
     }

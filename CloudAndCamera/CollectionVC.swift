@@ -1,7 +1,5 @@
 import UIKit
 import FirebaseAuth
-import FirebaseDatabase
-import FirebaseStorage
 
 class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, RefreshViewDelegate {
     
@@ -18,7 +16,14 @@ class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         collectionView.delegate = self
         collectionView.dataSource = self
         dataManager.delegate = self
+//        dataManager.retrieveComments(onCompletion: dataManager.loadImagePosts)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+//        dataManager.retrieveNewPost()
+        dataManager.comments.removeAll()
         dataManager.retrieveComments(onCompletion: dataManager.loadImagePosts)
+        
     }
     
     // MARK: - UICollectionViewDelegate protocol
@@ -30,7 +35,7 @@ class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
         if let currentCell = collectionView.cellForItem(at: indexPath) as? CustomCell {
             detailVC.detailImage = currentCell.cellImageView.image
-            dataManager.postIDKey = dataManager.postIDKeys[indexPath.row]
+            dataManager.selectedItemIndex = indexPath.item
         }
         
         let backItem = UIBarButtonItem()
@@ -46,7 +51,7 @@ class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         } catch let logoutError {
             print(logoutError)
         }
-        
+        dataManager.comments.removeAll()
         let storyboard = UIStoryboard(name: "Start", bundle: nil)
         let signInVC = storyboard.instantiateViewController(withIdentifier: "SignInVC")
         
@@ -62,7 +67,7 @@ class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionVi
 extension CollectionVC {
     // tell the collection view how many cells to make
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataManager.images.count
+        return dataManager.comments.count
     }
     
     // MARK: - UICollectionViewFlowLayout
@@ -82,7 +87,7 @@ extension CollectionVC {
         
         // Use the outlet in our custom class to get a reference to the UILabel in the cell
         
-        cell.cellImageView.image = dataManager.images[indexPath.row]
+        cell.cellImageView.image = dataManager.comments[indexPath.item].myImage
         cell.cellImageView.contentMode = .scaleAspectFill
         
         return cell
