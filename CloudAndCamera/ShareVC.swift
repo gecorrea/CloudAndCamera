@@ -47,7 +47,6 @@ class ShareVC: UIViewController {
         let uID = Auth.auth().currentUser!.uid
         
         var username = String()
-        //let user = Database.database().reference().child("users").child(uID).value(forKey: "username")
         let ref = Database.database().reference()
         
         ref.child("users").child(uID).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -70,8 +69,6 @@ class ShareVC: UIViewController {
                 self.tabBarController?.selectedIndex = 0
             }
 
-            
-            // ...
         }) { (error) in
             print(error.localizedDescription)
         }

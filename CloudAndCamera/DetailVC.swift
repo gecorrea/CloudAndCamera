@@ -1,7 +1,7 @@
 import UIKit
 import FirebaseDatabase
 
-class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
+class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, RefreshViewDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
@@ -16,15 +16,12 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
     @IBOutlet weak var likesLabel: UILabel!
     var imageName = "icn_like"
     @IBOutlet weak var commentView: UIView!
-    var postIDKey: String!
+    let dataManager = DAO.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        loadPosts()
-        
-//        var post = Comment.init(captionString: "test", photoUrlString: "urlTest")
-        
+        dataManager.delegate = self
+        dataManager.loadPosts()
         self.view.bringSubview(toFront: commentView)
         imageView.image = detailImage
         commentTextField.delegate = self
@@ -33,27 +30,7 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
         likesLabel.text = "\(numberOfLikes) likes"
     }
     
-    func loadPosts() {
-        Database.database().reference().child("posts").observe(.childAdded) { (snapshot: DataSnapshot) in
-            if snapshot.key == self.postIDKey {
-                if let dict = snapshot.value as? [String: Any] {
-                    let userText = dict["user"] as! String
-                    let captionText = dict["caption"] as! String
-                    let post = Comment(userString: userText, captionString: captionText)
-                    self.comments.append(post)
-                    self.tableView.reloadData()
-                }
-            }
-//                if self.chosenPhotoUrlString == photoUrlString {
-//                    let captionText = dict["caption"] as! String
-//                }
-//                let captionText = dict["caption"] as! String
-//                let post = Comment(captionString: captionText, photoUrlString: photoUrlString)
-//                self.comments.append(post)
-            
-//            }
-        }
-    }
+    
     
     // Start Editing The Text Field
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -120,6 +97,10 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
         else {
             likesLabel.text = "\(numberOfLikes) likes"
         }
+    }
+    
+    func refreshView() {
+        self.tableView.reloadData()
     }
 }
 

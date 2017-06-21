@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		A9E522A2860616ED1787BBEB /* Pods_CloudAndCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B097F1717F39674242BA5F52 /* Pods_CloudAndCamera.framework */; };
 		AA3E966A1EE9E7A00094EA9E /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3E96691EE9E7A00094EA9E /* CustomCell.swift */; };
+		AA45E7781EF9CF350079A4E2 /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA45E7771EF9CF350079A4E2 /* DAO.swift */; };
 		AA57362F1EE861670076D64A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA57362E1EE861670076D64A /* AppDelegate.swift */; };
 		AA5736361EE861670076D64A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA5736351EE861670076D64A /* Assets.xcassets */; };
 		AA5736411EE87FAF0076D64A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA5736401EE87FAF0076D64A /* GoogleService-Info.plist */; };
 		AA67907C1EEB41D500369BF4 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA67907B1EEB41D500369BF4 /* CustomTableViewCell.swift */; };
-		AA97651E1EEEF35100BBC54B /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA97651D1EEEF35100BBC54B /* DAO.swift */; };
 		AA9765201EEF292000BBC54B /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA97651F1EEF292000BBC54B /* SignInVC.swift */; };
 		AA9765221EEF2E2500BBC54B /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9765211EEF2E2500BBC54B /* SignUpVC.swift */; };
 		AA9765271EF03B8600BBC54B /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA9765261EF03B8600BBC54B /* Home.storyboard */; };
@@ -38,6 +38,7 @@
 		32BC334AEBE948F5E81A2DFD /* Pods-CloudAndCamera.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudAndCamera.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CloudAndCamera/Pods-CloudAndCamera.debug.xcconfig"; sourceTree = "<group>"; };
 		56A9407676418E66944D1A64 /* Pods-CloudAndCamera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudAndCamera.release.xcconfig"; path = "Pods/Target Support Files/Pods-CloudAndCamera/Pods-CloudAndCamera.release.xcconfig"; sourceTree = "<group>"; };
 		AA3E96691EE9E7A00094EA9E /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		AA45E7771EF9CF350079A4E2 /* DAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
 		AA57362B1EE861670076D64A /* CloudAndCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudAndCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA57362E1EE861670076D64A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA5736331EE861670076D64A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -46,7 +47,6 @@
 		AA57363A1EE861670076D64A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA5736401EE87FAF0076D64A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AA67907B1EEB41D500369BF4 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
-		AA97651D1EEEF35100BBC54B /* DAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
 		AA97651F1EEF292000BBC54B /* SignInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		AA9765211EEF2E2500BBC54B /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		AA9765241EF0377F00BBC54B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Start.storyboard; sourceTree = "<group>"; };
@@ -121,10 +121,8 @@
 				AA57362E1EE861670076D64A /* AppDelegate.swift */,
 				AAB1828E1EF1EB68002FB431 /* Config.swift */,
 				AAB1828C1EF1D992002FB431 /* AuthServices.swift */,
-				AA3E96691EE9E7A00094EA9E /* CustomCell.swift */,
-				AA67907B1EEB41D500369BF4 /* CustomTableViewCell.swift */,
-				AA97651D1EEEF35100BBC54B /* DAO.swift */,
-				AAB1829F1EF3333F002FB431 /* Model */,
+				AA45E7771EF9CF350079A4E2 /* DAO.swift */,
+				AAB1829F1EF3333F002FB431 /* Models */,
 				AAB182891EF051C6002FB431 /* ViewControllers */,
 				AAB182881EF051A6002FB431 /* Storyboards */,
 				AA5736351EE861670076D64A /* Assets.xcassets */,
@@ -165,12 +163,14 @@
 			name = ViewControllers;
 			sourceTree = "<group>";
 		};
-		AAB1829F1EF3333F002FB431 /* Model */ = {
+		AAB1829F1EF3333F002FB431 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				AAB182A41EF33631002FB431 /* Comment.swift */,
+				AA3E96691EE9E7A00094EA9E /* CustomCell.swift */,
+				AA67907B1EEB41D500369BF4 /* CustomTableViewCell.swift */,
 			);
-			name = Model;
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,7 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA97651E1EEEF35100BBC54B /* DAO.swift in Sources */,
+				AA45E7781EF9CF350079A4E2 /* DAO.swift in Sources */,
 				AA9765221EEF2E2500BBC54B /* SignUpVC.swift in Sources */,
 				AAB1829B1EF3186D002FB431 /* ShareVC.swift in Sources */,
 				AA67907C1EEB41D500369BF4 /* CustomTableViewCell.swift in Sources */,

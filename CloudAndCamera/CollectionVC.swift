@@ -3,13 +3,12 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 
-class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, RefreshViewDelegate {
     
     
     @IBOutlet var collectionView: UICollectionView!
     let reuseIdentifier = "collectionCell"
-    var images = [UIImage]()
-    var postIDKeys = [String]()
+    let dataManager = DAO.sharedInstance
     let sectionInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
     let itemsPerRow: CGFloat = 3
 
@@ -18,41 +17,9 @@ class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionVi
 
         collectionView.delegate = self
         collectionView.dataSource = self
-        loadImagePosts()
+        dataManager.delegate = self
+        dataManager.retrieveComments(onCompletion: dataManager.loadImagePosts)
     }
-    
-    func loadImagePosts() {
-        Database.database().reference().child("posts").observe(.childAdded) { (snapshot: DataSnapshot) in
-            self.postIDKeys.append(snapshot.key)
-            if let dict = snapshot.value as? [String: Any] {
-                let photoUrlString = dict["photoUrl"] as! String
-                //let storageRef = Storage.storage().reference(forURL: Config.STORAGE_ROOT_REF).child("posts").child(photoUrlString)
-                let storageRef = Storage.storage().reference(forURL: photoUrlString)
-                storageRef.downloadURL(completion: { (url, error) in
-                    if error != nil {
-                        print(error?.localizedDescription as Any)
-                        return
-                    }
-                    URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-                        if error != nil {
-                            print(error!)
-                            return
-                        }
-                        if let photo = UIImage(data: data!) {
-                            DispatchQueue.main.async {
-                                self.images.append(photo)
-                                self.collectionView.reloadData()
-                            }
-                        }
-                    }).resume()
-                })
-            }
-        }
-    }
-    
-    // MARK: - UICollectionViewDataSource protocol
-    
-
     
     // MARK: - UICollectionViewDelegate protocol
     
@@ -63,7 +30,7 @@ class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
         if let currentCell = collectionView.cellForItem(at: indexPath) as? CustomCell {
             detailVC.detailImage = currentCell.cellImageView.image
-            detailVC.postIDKey = postIDKeys[indexPath.row]
+            dataManager.postIDKey = dataManager.postIDKeys[indexPath.row]
         }
         
         let backItem = UIBarButtonItem()
@@ -85,13 +52,17 @@ class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         
         self.present(signInVC, animated: true, completion: nil)
     }
+    
+    func refreshView() {
+        self.collectionView.reloadData()
+    }
 }
 
 // UICollectionViewDataSource
 extension CollectionVC {
     // tell the collection view how many cells to make
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return dataManager.images.count
     }
     
     // MARK: - UICollectionViewFlowLayout
@@ -111,7 +82,7 @@ extension CollectionVC {
         
         // Use the outlet in our custom class to get a reference to the UILabel in the cell
         
-        cell.cellImageView.image = images[indexPath.row]
+        cell.cellImageView.image = dataManager.images[indexPath.row]
         cell.cellImageView.contentMode = .scaleAspectFill
         
         return cell
