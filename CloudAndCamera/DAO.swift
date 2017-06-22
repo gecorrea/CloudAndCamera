@@ -12,7 +12,10 @@ class DAO {
     var selectedItemIndex: Int!
     let postRef = Database.database().reference().child("posts")
     var delegate: RefreshViewDelegate?
-    let imageCache = NSCache <AnyObject, AnyObject>()
+    let photoCache = NSCache <AnyObject, AnyObject>()
+    var imageName = "icn_like"
+    var numberOfLikes = 0
+    var numberOfComments = 0
     
     
     // MARK: Methods for CollectionVC
@@ -35,18 +38,18 @@ class DAO {
     func loadImagePosts(onSuccess: @escaping () -> Void) {
         for comment in comments {
             let url = URL(string: comment.photoUrl)
-            
-            if let imageFromCache = imageCache.object(forKey: comment.photoUrl as AnyObject) as? UIImage {
-                comment.myImage = imageFromCache
+            // Load photo from cache if it is there.
+            if let photoFromCache = photoCache.object(forKey: comment.photoUrl as AnyObject) as? UIImage {
+                comment.myImage = photoFromCache
                 onSuccess()
             }
-            
             Alamofire.request(url!).response { response in // method defaults to `.get`
                 if let data = response.data {
                     if let photo = UIImage(data: data) {
-                        let imageToCache = photo
-                        self.imageCache.setObject(imageToCache, forKey: comment.photoUrl as AnyObject)
-                        comment.myImage = imageToCache
+                        // Add photo to cache.
+                        let photoToCache = photo
+                        self.photoCache.setObject(photoToCache, forKey: comment.photoUrl as AnyObject)
+                        comment.myImage = photoToCache
                     }
                 }
                 onSuccess()
@@ -58,6 +61,16 @@ class DAO {
     // MARK: Methods for DetailVC
     func loadPosts() {
         self.delegate?.refreshView()
+    }
+    
+    func likePhoto() {
+        imageName = "active"
+        numberOfLikes += 1
+    }
+    
+    func unlikePhoto() {
+        imageName = "icn_like"
+        numberOfLikes -= 1
     }
     
     

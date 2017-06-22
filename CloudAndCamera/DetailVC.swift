@@ -10,11 +10,10 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, Refr
     @IBOutlet weak var textFieldTrailingConstraint: NSLayoutConstraint!
     var detailImage: UIImage!
     @IBOutlet weak var likeButton: UIButton!
-    var numberOfLikes = 0
     @IBOutlet weak var likesLabel: UILabel!
-    var imageName = "icn_like"
     @IBOutlet weak var commentView: UIView!
     let dataManager = DAO.sharedInstance
+    var numberOfCells = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,10 +24,8 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, Refr
         commentTextField.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
-        likesLabel.text = "\(numberOfLikes) likes"
+        likesLabel.text = "\(dataManager.numberOfLikes) likes"
     }
-    
-    
     
     // Start Editing The Text Field
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -48,7 +45,7 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, Refr
     
     // Move the text field animated
     func moveTextField(_ textField: UITextField, moveDistance: Int, up: Bool) {
-        let moveDuration = 0.3
+        let moveDuration = 0.25
         let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
         
         UIView.animate(withDuration: moveDuration) { () -> Void in
@@ -72,26 +69,23 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, Refr
     }
 
     @IBAction func likeButtonPushed(_ sender: Any) {
-        if (imageName.isEqual( "icn_like"))  {
+        if (dataManager.imageName.isEqual( "icn_like"))  {
             likeButton.setImage(UIImage(named: "active_like"), for: .normal)
-            imageName = "active"
-            numberOfLikes += 1
-            setNumberOfLikesText()
+            dataManager.likePhoto()
         }
         else {
             likeButton.setImage(UIImage(named: "icn_like"), for: .normal)
-            imageName = "icn_like"
-            numberOfLikes -= 1
-            setNumberOfLikesText()
+            dataManager.unlikePhoto()
         }
+        setNumberOfLikesText()
     }
     
     func setNumberOfLikesText() {
-        if numberOfLikes == 1 {
-            likesLabel.text = "\(numberOfLikes) like"
+        if dataManager.numberOfLikes == 1 {
+            likesLabel.text = "\(dataManager.numberOfLikes) like"
         }
         else {
-            likesLabel.text = "\(numberOfLikes) likes"
+            likesLabel.text = "\(dataManager.numberOfLikes) likes"
         }
     }
     
@@ -107,8 +101,14 @@ extension DetailVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CustomTableViewCell
-        cell.userName.text = dataManager.comments[dataManager.selectedItemIndex].user
-        cell.comment.text = dataManager.comments[dataManager.selectedItemIndex].caption
+        if dataManager.numberOfComments == 0 {
+            cell.userName.text = dataManager.comments[dataManager.selectedItemIndex].user
+            cell.comment.text = dataManager.comments[dataManager.selectedItemIndex].caption
+            dataManager.numberOfComments += 1
+        }
+        else {
+            
+        }
         
         return cell
     }

@@ -79,6 +79,7 @@
                         <outlet property="captionTextView" destination="HZA-B1-iKA" id="wMy-sH-RyD"/>
                         <outlet property="photo" destination="aLO-a0-yqA" id="hKh-6y-fIJ"/>
                         <outlet property="shareButton" destination="Bln-rs-0Xn" id="x6h-t1-FUC"/>
+                        <outlet property="shareButtonBottomConstraint" destination="p3v-h0-9b7" id="3l1-se-Rot"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RL9-8V-8e6" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -1,10 +1,11 @@
 import UIKit
 
-class ShareVC: UIViewController {
+class ShareVC: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var captionTextView: UITextView!
     @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var shareButtonBottomConstraint: NSLayoutConstraint!
     var shareImage: UIImage!
     var username: String!
     let dataManager = DAO.sharedInstance
@@ -12,6 +13,28 @@ class ShareVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         photo.image = shareImage
+        captionTextView.delegate = self
+    }
+    
+    // Start editing the text view
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        moveButton(shareButton, moveDistance: 220, up: true)
+    }
+    
+    // Finish editing the text view
+    func textViewDidEndEditing(_ textView: UITextView) {
+        moveButton(shareButton, moveDistance: 220, up: false)
+    }
+    
+    // Move the share button animated
+    func moveButton(_ button: UIButton, moveDistance: Int, up: Bool) {
+        let moveDuration = 0.25
+        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
+        
+        UIView.animate(withDuration: moveDuration) { () -> Void in
+            self.shareButtonBottomConstraint.constant += movement
+            self.view.layoutIfNeeded()
+        }
     }
     
     // Dismiss keyboard if the user touches outside of it.
