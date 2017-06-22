@@ -36,6 +36,7 @@ class AuthServices {
         }
     }
     
+    
     // Save new username, email, and profileImage to firebase storage.
     static func setUserInfo (profileImageURL: String, username: String, email: String, uid: String, onSuccess: @escaping () -> Void) {
         let ref = Database.database().reference()

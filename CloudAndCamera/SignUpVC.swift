@@ -115,6 +115,7 @@ class SignUpVC: UIViewController {
     
 }
 
+
 // Extension to allow user to choose profile image from photo library.
 extension SignUpVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {

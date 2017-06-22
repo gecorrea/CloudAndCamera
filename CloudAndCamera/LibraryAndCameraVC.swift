@@ -60,6 +60,7 @@ class LibraryAndCameraVC: UIViewController {
 
 }
 
+
 // Extension to allow user to choose profile image from photo library.
 extension LibraryAndCameraVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {

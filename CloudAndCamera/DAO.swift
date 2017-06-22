@@ -14,8 +14,7 @@ class DAO {
     var delegate: RefreshViewDelegate?
     
     
-    
-// MARK: Methods for CollectionVC
+    // MARK: Methods for CollectionVC
     func retrieveComments(onCompletion: @escaping () -> Void) {
         postRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if let dict = snapshot.value as? [String: Any] {
@@ -32,34 +31,28 @@ class DAO {
         }
     }
     
-    
     func loadImagePosts(onSuccess: @escaping () -> Void) {
         for comment in comments {
-        let url = URL(string: comment.photoUrl)
+            let url = URL(string: comment.photoUrl)
             Alamofire.request(url!).response { response in // method defaults to `.get`
                 if let data = response.data {
                     if let photo = UIImage(data: data) {
-                        //DispatchQueue.main.async {
-                            comment.myImage = photo
-                        
-                        //}
+                        comment.myImage = photo
                     }
                 }
                 onSuccess()
             }
         }
     }
-   
     
     
-// MARK: Methods for DetailVC
+    // MARK: Methods for DetailVC
     func loadPosts() {
         self.delegate?.refreshView()
     }
     
     
-    
-// MARK: Methods for ShareVC
+    // MARK: Methods for ShareVC
     func storeImage(imageData: Data, onError: @escaping (_ errorMessage: String?) -> Void, onSuccess: @escaping (StorageMetadata) -> Void) {
         let photoIDString = NSUUID().uuidString
         let storageRef = Storage.storage().reference(forURL: Config.STORAGE_ROOT_REF).child("posts").child(photoIDString)

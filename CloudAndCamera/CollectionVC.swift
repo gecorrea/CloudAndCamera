@@ -26,6 +26,7 @@ class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         }
     }
     
+    
 // MARK: - UICollectionViewDelegate protocol
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -57,6 +58,7 @@ class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         self.present(signInVC, animated: true, completion: nil)
     }
 }
+
 
 // UICollectionViewDataSource
 extension CollectionVC {
