@@ -13,6 +13,8 @@ class DAO {
     let postRef = Database.database().reference().child("posts")
     var delegate: RefreshViewDelegate?
     
+    
+    
 // MARK: Methods for CollectionVC
     func retrieveComments(onCompletion: @escaping () -> Void) {
         postRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
@@ -47,25 +49,15 @@ class DAO {
             }
         }
     }
-
-
-//    func retrieveNewPost() {
-//        postRef.observe(.childAdded, with: {(snapshot) -> Void in
-//            if let dict = snapshot.value as? [String: Any] {
-//                let username = dict["user"] as! String
-//                let caption = dict["caption"] as! String
-//                let photoUrl = dict["photoUrl"] as! String
-//                let newComment = Comment(userString: username, captionString: caption, photoUrlString: photoUrl)
-//                self.comments.append(newComment)
-//                self.loadImagePosts()
-//            }
-//        })
-//    }
    
+    
+    
 // MARK: Methods for DetailVC
     func loadPosts() {
         self.delegate?.refreshView()
     }
+    
+    
     
 // MARK: Methods for ShareVC
     func storeImage(imageData: Data, onError: @escaping (_ errorMessage: String?) -> Void, onSuccess: @escaping (StorageMetadata) -> Void) {
@@ -90,7 +82,6 @@ class DAO {
             // Get user value
             let value = snapshot.value as? NSDictionary
             username = value?["username"] as? String ?? ""
-            //            print(username)
             
             let postsRef = ref.child("posts")
             let newPostID = postsRef.childByAutoId().key
