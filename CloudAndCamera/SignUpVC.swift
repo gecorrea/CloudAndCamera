@@ -1,7 +1,4 @@
 import UIKit
-import FirebaseDatabase
-import FirebaseAuth
-import FirebaseStorage
 
 class SignUpVC: UIViewController {
     

@@ -16,21 +16,21 @@ class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         collectionView.delegate = self
         collectionView.dataSource = self
         dataManager.delegate = self
-//        dataManager.retrieveComments(onCompletion: dataManager.loadImagePosts)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        dataManager.retrieveNewPost()
         dataManager.comments.removeAll()
-        dataManager.retrieveComments(onCompletion: dataManager.loadImagePosts)
-        
+        dataManager.retrieveComments { 
+            self.dataManager.loadImagePosts(onSuccess: {
+                self.collectionView.reloadData()
+            })
+        }
     }
     
-    // MARK: - UICollectionViewDelegate protocol
+// MARK: - UICollectionViewDelegate protocol
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // handle tap events
-        print("You selected cell #\(indexPath.item)!")
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
         if let currentCell = collectionView.cellForItem(at: indexPath) as? CustomCell {

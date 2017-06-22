@@ -1,11 +1,9 @@
 import Foundation
-import FirebaseAuth
-import FirebaseDatabase
-import FirebaseStorage
+import Firebase
 
 class AuthServices {
     
-    
+// MARK: Method for SignInVC
     static func signIn (email: String, password: String, onSuccess: @escaping () -> Void, onError: @escaping (_ errorMessage: String?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if error != nil{
@@ -16,6 +14,8 @@ class AuthServices {
         }
     }
     
+    
+// MARK: Methods for SignUpVC
     static func signUp (username: String, email: String, password: String, imageData: Data, onSuccess: @escaping () -> Void, onError: @escaping (_ errorMessage: String?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (user: User?, error: Error?) in
             if error != nil {
