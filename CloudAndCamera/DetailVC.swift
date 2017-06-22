@@ -24,7 +24,7 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, Refr
         commentTextField.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
-        likesLabel.text = "\(dataManager.numberOfLikes) likes"
+//        likesLabel.text = "\(dataManager.numberOfLikes) likes"
     }
     
     // Start Editing The Text Field
@@ -71,21 +71,21 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, Refr
     @IBAction func likeButtonPushed(_ sender: Any) {
         if (dataManager.imageName.isEqual( "icn_like"))  {
             likeButton.setImage(UIImage(named: "active_like"), for: .normal)
-            dataManager.likePhoto()
+            dataManager.handleLikes(photoUrl: dataManager.comments[dataManager.selectedItemIndex].photoUrl)
         }
         else {
             likeButton.setImage(UIImage(named: "icn_like"), for: .normal)
-            dataManager.unlikePhoto()
+            dataManager.handleLikes(photoUrl: dataManager.comments[dataManager.selectedItemIndex].photoUrl)
         }
         setNumberOfLikesText()
     }
     
     func setNumberOfLikesText() {
-        if dataManager.numberOfLikes == 1 {
-            likesLabel.text = "\(dataManager.numberOfLikes) like"
+        if dataManager.likeCount == 1 {
+            likesLabel.text = "\(dataManager.likeCount) like"
         }
         else {
-            likesLabel.text = "\(dataManager.numberOfLikes) likes"
+            likesLabel.text = "\(dataManager.likeCount) likes"
         }
     }
     

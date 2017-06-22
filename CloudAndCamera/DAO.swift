@@ -14,20 +14,22 @@ class DAO {
     var delegate: RefreshViewDelegate?
     let photoCache = NSCache <AnyObject, AnyObject>()
     var imageName = "icn_like"
-    var numberOfLikes = 0
+    var likes = Dictionary <String, Bool>()
+    var likeCount = Int()
     var numberOfComments = 0
     
     
     // MARK: Methods for CollectionVC
     func retrieveComments(onCompletion: @escaping () -> Void) {
         postRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+            let key = snapshot.key
             if let dict = snapshot.value as? [String: Any] {
                 for (_, value) in dict {
                     guard let value = value as? [String: Any] else {return}
                     let username = value["user"] as! String
                     let caption = value["caption"] as! String
                     let photoUrl = value["photoUrl"] as! String
-                    let newComment = Comment(userString: username, captionString: caption, photoUrlString: photoUrl)
+                    let newComment = Comment(userString: username, captionString: caption, photoUrlString: photoUrl, keyString: key)
                     self.comments.append(newComment)
                 }
             }
@@ -63,14 +65,37 @@ class DAO {
         self.delegate?.refreshView()
     }
     
-    func likePhoto() {
-        imageName = "active"
-        numberOfLikes += 1
-    }
-    
-    func unlikePhoto() {
-        imageName = "icn_like"
-        numberOfLikes -= 1
+    func handleLikes(photoUrl: String) {
+        postRef.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
+            if var post = currentData.value as? [String : AnyObject], let uid = Auth.auth().currentUser?.uid {
+                
+                self.likes = post["likes"] as? [String : Bool] ?? [:]
+                self.likeCount = post["likeCount"] as? Int ?? 0
+                if let _ = self.likes[uid] {
+                    // Unstar the post and remove self from stars
+                    self.likeCount -= 1
+                    self.likes.removeValue(forKey: uid)
+                    self.imageName = "icn_like"
+                } else {
+                    // Star the post and add self to stars
+                    self.likeCount += 1
+                    self.likes[uid] = true
+                    self.imageName = "active"
+                }
+                post["likeCount"] = self.likeCount as AnyObject?
+                post["likes"] = self.likes as AnyObject?
+                
+                // Set value and report transaction success
+                currentData.value = post
+                
+                return TransactionResult.success(withValue: currentData)
+            }
+            return TransactionResult.success(withValue: currentData)
+        }) { (error, committed, snapshot) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     
