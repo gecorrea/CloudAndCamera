@@ -1,7 +1,7 @@
 import UIKit
 import FirebaseAuth
 
-class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, RefreshViewDelegate {
     
     
     @IBOutlet var collectionView: UICollectionView!
@@ -15,6 +15,7 @@ class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionVi
 
         collectionView.delegate = self
         collectionView.dataSource = self
+        dataManager.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +57,10 @@ class CollectionVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         let signInVC = storyboard.instantiateViewController(withIdentifier: "SignInVC")
         
         self.present(signInVC, animated: true, completion: nil)
+    }
+    
+    func refreshView() {
+        collectionView.reloadData()
     }
 }
 

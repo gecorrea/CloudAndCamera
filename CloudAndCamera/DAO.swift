@@ -12,6 +12,7 @@ class DAO {
     var selectedItemIndex: Int!
     let postRef = Database.database().reference().child("posts")
     var delegate: RefreshViewDelegate?
+    let imageCache = NSCache <AnyObject, AnyObject>()
     
     
     // MARK: Methods for CollectionVC
@@ -34,10 +35,18 @@ class DAO {
     func loadImagePosts(onSuccess: @escaping () -> Void) {
         for comment in comments {
             let url = URL(string: comment.photoUrl)
+            
+            if let imageFromCache = imageCache.object(forKey: comment.photoUrl as AnyObject) as? UIImage {
+                comment.myImage = imageFromCache
+                onSuccess()
+            }
+            
             Alamofire.request(url!).response { response in // method defaults to `.get`
                 if let data = response.data {
                     if let photo = UIImage(data: data) {
-                        comment.myImage = photo
+                        let imageToCache = photo
+                        self.imageCache.setObject(imageToCache, forKey: comment.photoUrl as AnyObject)
+                        comment.myImage = imageToCache
                     }
                 }
                 onSuccess()
