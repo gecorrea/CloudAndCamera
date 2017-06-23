@@ -53,7 +53,7 @@ class SignInVC: UIViewController {
     func textFieldDidChange () {
         guard let email = emailTextField.text, !email.isEmpty,
             let password = passwordTextField.text, !password.isEmpty
-            else{
+            else {
                 signInButton.setTitleColor(UIColor.lightText, for: .normal)
                 signInButton.isEnabled = false
                 return
@@ -65,10 +65,9 @@ class SignInVC: UIViewController {
     // Method called when sign in button is pressed.
     @IBAction func signIn(_ sender: UIButton) {
         view.endEditing(true)
-        if let tempEmail = emailTextField.text {
+        if let tempEmail = emailTextField.text,
+            let tempPassword = passwordTextField.text {
             self.validEmail = tempEmail
-        }
-        if let tempPassword = passwordTextField.text {
             self.validPassword = tempPassword
         }
         ProgressHUD.show("Please wait...", interaction: false)

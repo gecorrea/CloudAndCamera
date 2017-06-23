@@ -8,12 +8,11 @@ protocol RefreshViewDelegate {
 
 class DAO {
     static let sharedInstance = DAO()
-    var comments = [Comment]()
+    var posts = [Post]()
     var selectedItemIndex: Int!
     let postRef = Database.database().reference().child("posts")
     var delegate: RefreshViewDelegate?
     let photoCache = NSCache <AnyObject, AnyObject>()
-    var imageName = "icn_like"
     var likes = Dictionary <String, Bool>()
     var likeCount = Int()
     var numberOfComments = 0
@@ -22,15 +21,14 @@ class DAO {
     // MARK: Methods for CollectionVC
     func retrieveComments(onCompletion: @escaping () -> Void) {
         postRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
-            let key = snapshot.key
             if let dict = snapshot.value as? [String: Any] {
                 for (_, value) in dict {
                     guard let value = value as? [String: Any] else {return}
                     let username = value["user"] as! String
                     let caption = value["caption"] as! String
                     let photoUrl = value["photoUrl"] as! String
-                    let newComment = Comment(userString: username, captionString: caption, photoUrlString: photoUrl, keyString: key)
-                    self.comments.append(newComment)
+                    let newPost = Post(userString: username, captionString: caption, photoUrlString: photoUrl)
+                    self.posts.append(newPost)
                 }
             }
             onCompletion()
@@ -38,11 +36,11 @@ class DAO {
     }
     
     func loadImagePosts(onSuccess: @escaping () -> Void) {
-        for comment in comments {
-            let url = URL(string: comment.photoUrl)
+        for post in posts {
+            let url = URL(string: post.photoUrl)
             // Load photo from cache if it is there.
-            if let photoFromCache = photoCache.object(forKey: comment.photoUrl as AnyObject) as? UIImage {
-                comment.myImage = photoFromCache
+            if let photoFromCache = photoCache.object(forKey: post.photoUrl as AnyObject) as? UIImage {
+                post.myImage = photoFromCache
                 onSuccess()
             }
             Alamofire.request(url!).response { response in // method defaults to `.get`
@@ -50,8 +48,8 @@ class DAO {
                     if let photo = UIImage(data: data) {
                         // Add photo to cache.
                         let photoToCache = photo
-                        self.photoCache.setObject(photoToCache, forKey: comment.photoUrl as AnyObject)
-                        comment.myImage = photoToCache
+                        self.photoCache.setObject(photoToCache, forKey: post.photoUrl as AnyObject)
+                        post.myImage = photoToCache
                     }
                 }
                 onSuccess()
@@ -65,22 +63,22 @@ class DAO {
         self.delegate?.refreshView()
     }
     
-    func handleLikes(photoUrl: String) {
+    func handleLikes(onCompletion: @escaping () -> Void) {
         postRef.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
             if var post = currentData.value as? [String : AnyObject], let uid = Auth.auth().currentUser?.uid {
-                
-                self.likes = post["likes"] as? [String : Bool] ?? [:]
-                self.likeCount = post["likeCount"] as? Int ?? 0
+                print(post)
+//                self.posts[self.selectedItemIndex].likes = post["likes"] as? [String : Bool] ?? [:]
+//                self.posts[self.selectedItemIndex].likeCount = post["likeCount"] as? Int ?? 0
                 if let _ = self.likes[uid] {
-                    // Unstar the post and remove self from stars
-                    self.likeCount -= 1
-                    self.likes.removeValue(forKey: uid)
-                    self.imageName = "icn_like"
+                    // Unlike the post and remove self from likes
+                    self.posts[self.selectedItemIndex].likeCount -= 1
+                    self.posts[self.selectedItemIndex].likes.removeValue(forKey: uid)
+                    self.posts[self.selectedItemIndex].imageName = "icn_like"
                 } else {
-                    // Star the post and add self to stars
-                    self.likeCount += 1
-                    self.likes[uid] = true
-                    self.imageName = "active"
+                    // Like the post and add self to likes
+                    self.posts[self.selectedItemIndex].likeCount += 1
+                    self.posts[self.selectedItemIndex].likes[uid] = true
+                    self.posts[self.selectedItemIndex].imageName = "active"
                 }
                 post["likeCount"] = self.likeCount as AnyObject?
                 post["likes"] = self.likes as AnyObject?
@@ -123,10 +121,9 @@ class DAO {
             let value = snapshot.value as? NSDictionary
             username = value?["username"] as? String ?? ""
             
-            let postsRef = ref.child("posts")
-            let newPostID = postsRef.childByAutoId().key
-            let newPostRef = postsRef.child(newPostID)
-            newPostRef.setValue(["photoUrl": photoUrl, "caption": caption, "user": username]) { (error, ref) in
+            let newPostID = self.postRef.childByAutoId().key
+            let newPostRef = self.postRef.child(newPostID)
+            newPostRef.setValue(["photoUrl": photoUrl, "caption": caption, "user": username, "likes": [uID: "false"], "likesCount": 0]) { (error, ref) in
                 if error != nil {
                     onError(error?.localizedDescription)
                     return

@@ -1,6 +1,6 @@
 import UIKit
 
-class ShareVC: UIViewController, UITextViewDelegate {
+class ShareVC: UIViewController {
     
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var captionTextView: UITextView!
@@ -9,21 +9,11 @@ class ShareVC: UIViewController, UITextViewDelegate {
     var shareImage: UIImage!
     var username: String!
     let dataManager = DAO.sharedInstance
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         photo.image = shareImage
         captionTextView.delegate = self
-    }
-    
-    // Start editing the text view
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        moveButton(shareButton, moveDistance: 220, up: true)
-    }
-    
-    // Finish editing the text view
-    func textViewDidEndEditing(_ textView: UITextView) {
-        moveButton(shareButton, moveDistance: 220, up: false)
     }
     
     // Move the share button animated
@@ -41,7 +31,7 @@ class ShareVC: UIViewController, UITextViewDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-
+    
     @IBAction func shareAction(_ sender: UIButton) {
         ProgressHUD.show("Loading...", interaction: false)
         if let profileImg = self.photo.image, let imageData = UIImageJPEGRepresentation(profileImg, 0.1) {
@@ -64,5 +54,17 @@ class ShareVC: UIViewController, UITextViewDelegate {
         else {
             ProgressHUD.showError("Please set a profile image.")
         }
+    }
+}
+
+extension ShareVC: UITextViewDelegate {
+    // Start editing the text view
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        moveButton(shareButton, moveDistance: 220, up: true)
+    }
+    
+    // Finish editing the text view
+    func textViewDidEndEditing(_ textView: UITextView) {
+        moveButton(shareButton, moveDistance: 220, up: false)
     }
 }

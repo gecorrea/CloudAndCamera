@@ -3,7 +3,7 @@ import MobileCoreServices
 
 
 class LibraryAndCameraVC: UIViewController {
-
+    
     
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var libraryButton: UIButton!
@@ -25,7 +25,7 @@ class LibraryAndCameraVC: UIViewController {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-
+    
     @IBAction func cameraButtonPushed(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             picker.allowsEditing = false
@@ -45,7 +45,7 @@ class LibraryAndCameraVC: UIViewController {
         alertVC.addAction(okAction)
         present(alertVC, animated: true, completion: nil)
     }
-
+    
     @IBAction func libraryButtonPushed(_ sender: UIButton) {
         picker.allowsEditing = false
         picker.sourceType = .photoLibrary
@@ -57,7 +57,7 @@ class LibraryAndCameraVC: UIViewController {
         pickerController.delegate = self
         present(pickerController, animated: true, completion: nil)
     }
-
+    
 }
 
 

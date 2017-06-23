@@ -1,7 +1,7 @@
 import UIKit
 
-class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, RefreshViewDelegate {
-
+class DetailVC: UIViewController {
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var commentTextField: UITextField!
@@ -13,7 +13,6 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, Refr
     @IBOutlet weak var likesLabel: UILabel!
     @IBOutlet weak var commentView: UIView!
     let dataManager = DAO.sharedInstance
-    var numberOfCells = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,9 +23,64 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, Refr
         commentTextField.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
-//        likesLabel.text = "\(dataManager.numberOfLikes) likes"
+        setNumberOfLikesText()
     }
     
+    // Move the text field animated
+    func moveTextField(_ textField: UITextField, moveDistance: Int, up: Bool) {
+        let moveDuration = 0.25
+        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
+        
+        UIView.animate(withDuration: moveDuration) { () -> Void in
+            self.commentViewBottomConstraint.constant += movement
+            self.textFieldTrailingConstraint.constant += (up ? 65 : -65)
+            self.sendButton.isHidden = up ? false : true
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    // Handle hiding the keyboard.
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    @IBAction func likeButtonPushed(_ sender: Any) {
+        dataManager.posts[dataManager.selectedItemIndex].imageName.isEqual("icn_like") ? likeButton.setImage(UIImage(named: "active_like"), for: .normal) : likeButton.setImage(UIImage(named: "icn_like"), for: .normal)
+        dataManager.handleLikes {
+            self.setNumberOfLikesText()
+        }
+    }
+    
+    func setNumberOfLikesText() {
+        likesLabel.text = dataManager.posts[dataManager.selectedItemIndex].likeCount == 1 ? "\(dataManager.posts[dataManager.selectedItemIndex].likeCount) like" : "\(dataManager.posts[dataManager.selectedItemIndex].likeCount) likes"
+    }
+}
+
+extension DetailVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CustomTableViewCell
+        if dataManager.numberOfComments == 0 {
+            cell.userName.text = dataManager.posts[dataManager.selectedItemIndex].user
+            cell.comment.text = dataManager.posts[dataManager.selectedItemIndex].caption
+            dataManager.numberOfComments += 1
+        }
+        else {
+            
+        }
+        
+        return cell
+    }
+}
+
+extension DetailVC: UITableViewDelegate {
+    
+}
+
+extension DetailVC: UITextFieldDelegate {
     // Start Editing The Text Field
     func textFieldDidBeginEditing(_ textField: UITextField) {
         moveTextField(textField, moveDistance: 220, up: true)
@@ -42,74 +96,10 @@ class DetailVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, Refr
         textField.resignFirstResponder()
         return true
     }
-    
-    // Move the text field animated
-    func moveTextField(_ textField: UITextField, moveDistance: Int, up: Bool) {
-        let moveDuration = 0.25
-        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
-        
-        UIView.animate(withDuration: moveDuration) { () -> Void in
-            self.commentViewBottomConstraint.constant += movement
-            if up == true {
-                self.textFieldTrailingConstraint.constant += 65
-                self.sendButton.isHidden = false
-            }
-            else {
-                self.textFieldTrailingConstraint.constant -= 65
-                self.sendButton.isHidden = true
-            }
-            self.view.layoutIfNeeded()
-        }
-
-    }
-    
-    // Handle hiding the keyboard.
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-
-    @IBAction func likeButtonPushed(_ sender: Any) {
-        if (dataManager.imageName.isEqual( "icn_like"))  {
-            likeButton.setImage(UIImage(named: "active_like"), for: .normal)
-            dataManager.handleLikes(photoUrl: dataManager.comments[dataManager.selectedItemIndex].photoUrl)
-        }
-        else {
-            likeButton.setImage(UIImage(named: "icn_like"), for: .normal)
-            dataManager.handleLikes(photoUrl: dataManager.comments[dataManager.selectedItemIndex].photoUrl)
-        }
-        setNumberOfLikesText()
-    }
-    
-    func setNumberOfLikesText() {
-        if dataManager.likeCount == 1 {
-            likesLabel.text = "\(dataManager.likeCount) like"
-        }
-        else {
-            likesLabel.text = "\(dataManager.likeCount) likes"
-        }
-    }
-    
-    func refreshView() {
-        self.tableView.reloadData()
-    }
 }
 
-extension DetailVC: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CustomTableViewCell
-        if dataManager.numberOfComments == 0 {
-            cell.userName.text = dataManager.comments[dataManager.selectedItemIndex].user
-            cell.comment.text = dataManager.comments[dataManager.selectedItemIndex].caption
-            dataManager.numberOfComments += 1
-        }
-        else {
-            
-        }
-        
-        return cell
+extension DetailVC: RefreshViewDelegate {
+    func refreshView() {
+        self.tableView.reloadData()
     }
 }

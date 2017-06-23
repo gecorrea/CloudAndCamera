@@ -90,13 +90,11 @@ class SignUpVC: UIViewController {
     // Method called when sign up button is pressed.
     @IBAction func signUp(_ sender: UIButton) {
         view.endEditing(true)
-        if let tempUserName = userNameTextField.text {
+        if let tempUserName = userNameTextField.text,
+            let tempEmail = emailTextField.text,
+            let tempPassword = passwordTextField.text {
             self.validUsername = tempUserName
-        }
-        if let tempEmail = emailTextField.text {
             self.validEmail = tempEmail
-        }
-        if let tempPassword = passwordTextField.text {
             self.validPassword = tempPassword
         }
         if let profileImg = self.selectedImage, let imageData = UIImageJPEGRepresentation(profileImg, 0.1) {
