@@ -16,14 +16,17 @@ class DetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataManager.delegate = self
-        dataManager.loadPosts()
         self.view.bringSubview(toFront: commentView)
         imageView.image = detailImage
         commentTextField.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         setNumberOfLikesText()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        dataManager.delegate = self
+        dataManager.loadPosts()
     }
     
     // Move the text field animated
@@ -45,13 +48,13 @@ class DetailVC: UIViewController {
     }
     
     @IBAction func likeButtonPushed(_ sender: Any) {
-        dataManager.posts[dataManager.selectedItemIndex].imageName.isEqual("icn_like") ? likeButton.setImage(UIImage(named: "active_like"), for: .normal) : likeButton.setImage(UIImage(named: "icn_like"), for: .normal)
         dataManager.handleLikes {
             self.setNumberOfLikesText()
         }
     }
     
     func setNumberOfLikesText() {
+        dataManager.posts[dataManager.selectedItemIndex].likelabel == true ? likeButton.setImage(UIImage(named: "active_like"), for: .normal) : likeButton.setImage(UIImage(named: "icn_like"), for: .normal)
         likesLabel.text = dataManager.posts[dataManager.selectedItemIndex].likeCount == 1 ? "\(dataManager.posts[dataManager.selectedItemIndex].likeCount) like" : "\(dataManager.posts[dataManager.selectedItemIndex].likeCount) likes"
     }
 }
@@ -63,14 +66,14 @@ extension DetailVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CustomTableViewCell
-        if dataManager.numberOfComments == 0 {
+//        if dataManager.numberOfComments == 0 {
             cell.userName.text = dataManager.posts[dataManager.selectedItemIndex].user
             cell.comment.text = dataManager.posts[dataManager.selectedItemIndex].caption
-            dataManager.numberOfComments += 1
-        }
-        else {
-            
-        }
+//            dataManager.numberOfComments += 1
+//        }
+//        else {
+//            
+//        }
         
         return cell
     }

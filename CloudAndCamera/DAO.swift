@@ -13,21 +13,25 @@ class DAO {
     let postRef = Database.database().reference().child("posts")
     var delegate: RefreshViewDelegate?
     let photoCache = NSCache <AnyObject, AnyObject>()
-    var likes = Dictionary <String, Bool>()
-    var likeCount = Int()
     var numberOfComments = 0
     
     
     // MARK: Methods for CollectionVC
     func retrieveComments(onCompletion: @escaping () -> Void) {
         postRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
-            if let dict = snapshot.value as? [String: Any] {
+            if let dict = snapshot.value as? [String: Any], let uid = Auth.auth().currentUser?.uid {
                 for (_, value) in dict {
                     guard let value = value as? [String: Any] else {return}
+                    let postKey = value["post_key"] as! String
                     let username = value["user"] as! String
                     let caption = value["caption"] as! String
                     let photoUrl = value["photoUrl"] as! String
-                    let newPost = Post(userString: username, captionString: caption, photoUrlString: photoUrl)
+                    let likeCount = value["likeCount"] as! Int
+                    let likeLabelDict = value["likes"] as? [String : Bool]
+                    let newPost = Post(postKeyString: postKey, userString: username, captionString: caption, photoUrlString: photoUrl, likeNumber: likeCount)
+                    if let valueLikeLabel = likeLabelDict?[uid] {
+                        newPost.likelabel = valueLikeLabel
+                    }
                     self.posts.append(newPost)
                 }
             }
@@ -64,28 +68,29 @@ class DAO {
     }
     
     func handleLikes(onCompletion: @escaping () -> Void) {
-        postRef.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
-            if var post = currentData.value as? [String : AnyObject], let uid = Auth.auth().currentUser?.uid {
-                print(post)
-//                self.posts[self.selectedItemIndex].likes = post["likes"] as? [String : Bool] ?? [:]
-//                self.posts[self.selectedItemIndex].likeCount = post["likeCount"] as? Int ?? 0
-                if let _ = self.likes[uid] {
+        let specificPostRef = postRef.child(posts[selectedItemIndex].postKey)
+        specificPostRef.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
+            if var post = currentData.value as? [String : Any], let uid = Auth.auth().currentUser?.uid {
+                self.posts[self.selectedItemIndex].likes = post["likes"] as! [String : Bool]
+                self.posts[self.selectedItemIndex].likeCount = post["likeCount"] as! Int
+                if self.posts[self.selectedItemIndex].likes[uid] == true {
                     // Unlike the post and remove self from likes
                     self.posts[self.selectedItemIndex].likeCount -= 1
-                    self.posts[self.selectedItemIndex].likes.removeValue(forKey: uid)
-                    self.posts[self.selectedItemIndex].imageName = "icn_like"
+                    self.posts[self.selectedItemIndex].likes.updateValue(false, forKey: uid)
+                    self.posts[self.selectedItemIndex].likelabel = false
                 } else {
                     // Like the post and add self to likes
                     self.posts[self.selectedItemIndex].likeCount += 1
                     self.posts[self.selectedItemIndex].likes[uid] = true
-                    self.posts[self.selectedItemIndex].imageName = "active"
+                    self.posts[self.selectedItemIndex].likelabel = true
                 }
-                post["likeCount"] = self.likeCount as AnyObject?
-                post["likes"] = self.likes as AnyObject?
-                
+                post["likes"] = self.posts[self.selectedItemIndex].likes as AnyObject?
+                post["likeCount"] = self.posts[self.selectedItemIndex].likeCount as AnyObject?
                 // Set value and report transaction success
                 currentData.value = post
-                
+                DispatchQueue.main.async {
+                    onCompletion()
+                }
                 return TransactionResult.success(withValue: currentData)
             }
             return TransactionResult.success(withValue: currentData)
@@ -123,7 +128,7 @@ class DAO {
             
             let newPostID = self.postRef.childByAutoId().key
             let newPostRef = self.postRef.child(newPostID)
-            newPostRef.setValue(["photoUrl": photoUrl, "caption": caption, "user": username, "likes": [uID: "false"], "likesCount": 0]) { (error, ref) in
+            newPostRef.setValue(["post_key": newPostID, "photoUrl": photoUrl, "caption": caption, "user": username, "likes": [uID: false], "likeCount": 0]) { (error, ref) in
                 if error != nil {
                     onError(error?.localizedDescription)
                     return
