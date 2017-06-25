@@ -51,13 +51,7 @@ class LibraryAndCameraVC: UIViewController {
         picker.sourceType = .photoLibrary
         present(picker, animated: true, completion: nil)
     }
-    
-    func handleSelectedProfileImageView() {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        present(pickerController, animated: true, completion: nil)
-    }
-    
+
 }
 
 
