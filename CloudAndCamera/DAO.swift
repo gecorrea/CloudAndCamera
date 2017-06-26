@@ -9,12 +9,13 @@ protocol RefreshViewDelegate {
 class DAO {
     static let sharedInstance = DAO()
     var posts = [Post]()
-    var comments = [Comment]()
     var selectedItemIndex: Int!
     var currentUser: String!
+    var currentProfileUrl: String!
     let postRef = Database.database().reference().child("posts")
     var delegate: RefreshViewDelegate?
     let photoCache = NSCache <AnyObject, AnyObject>()
+    let profilePhotoCache = NSCache <AnyObject, AnyObject>()
     
     // MARK: Methods for CollectionVC
     func retrieveComments(onCompletion: @escaping () -> Void) {
@@ -23,13 +24,14 @@ class DAO {
                 for (_, value) in dict {
                     guard let value = value as? [String: Any] else {return}
                     let postKey = value["post_key"] as! String
+                    let profileImageUrls = value["profile_urls"] as! [String]
                     let users = value["users"] as! [String]
                     let comments = value["comments"] as! [String]
                     let commentCount = value["comment_count"] as! Int
                     let photoUrl = value["photo_url"] as! String
                     let likeCount = value["like_count"] as! Int
                     let likeLabelDict = value["likes"] as? [String : Bool]
-                    let newPost = Post(postKey: postKey, usersArray: users, commentsArray: comments, commentCount: commentCount, likeCount: likeCount, photoUrl: photoUrl)
+                    let newPost = Post(postKey: postKey, profileImageUrlsArray: profileImageUrls, usersArray: users, commentsArray: comments, commentCount: commentCount, likeCount: likeCount, photoUrl: photoUrl)
                     if let valueLikeLabel = likeLabelDict?[uid] {
                         newPost.likelabel = valueLikeLabel
                     }
@@ -102,31 +104,37 @@ class DAO {
         }
     }
 
-    func getCurrentUser() {
+    func getCurrentUser(onCompletion: @escaping () -> Void) {
         var username = String()
+        var profileImageUrl = String()
         let uID = Auth.auth().currentUser!.uid
         let ref = Database.database().reference()
         ref.child("users").child(uID).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary
             username = value?["username"] as! String
+            profileImageUrl = value?["profileImageURL"] as! String
             DispatchQueue.main.async {
                 self.currentUser = username
+                self.currentProfileUrl = profileImageUrl
+                onCompletion()
             }
         })
     }
 
     func postComment(user: String, userPost: String, onCompletion: @escaping () -> Void) {
-
         let specificPostRef = self.postRef.child(self.posts[self.selectedItemIndex].postKey)
         specificPostRef.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
             if var post = currentData.value as? [String : Any] {
+                self.posts[self.selectedItemIndex].profileImageUrls = post["profile_urls"] as! [String]
                 self.posts[self.selectedItemIndex].users = post["users"] as! [String]
                 self.posts[self.selectedItemIndex].comments = post["comments"] as! [String]
                 self.posts[self.selectedItemIndex].commentCount = post["comment_count"] as! Int
+                self.posts[self.selectedItemIndex].profileImageUrls.append(self.currentProfileUrl)
                 self.posts[self.selectedItemIndex].users.append(user)
                 self.posts[self.selectedItemIndex].comments.append(userPost)
                 self.posts[self.selectedItemIndex].commentCount += 1
+                post["profile_urls"] = self.posts[self.selectedItemIndex].profileImageUrls as AnyObject?
                 post["users"] = self.posts[self.selectedItemIndex].users as AnyObject?
                 post["comments"] = self.posts[self.selectedItemIndex].comments as AnyObject?
                 post["comment_count"] = self.posts[self.selectedItemIndex].commentCount as AnyObject?
@@ -142,6 +150,13 @@ class DAO {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func deletePost(onCompletion: @escaping () -> Void) {
+        let specificPostRef = self.postRef.child(self.posts[self.selectedItemIndex].postKey)
+        specificPostRef.removeValue()
+        posts.remove(at: selectedItemIndex)
+        onCompletion()
     }
     
     
@@ -161,14 +176,16 @@ class DAO {
     func sendDataToDatabase(photoUrl: String, comment: String, onSuccess: @escaping () -> Void, onError: @escaping (_ errorMessage: String?) -> Void) {
         let uID = Auth.auth().currentUser!.uid
         var username = String()
+        var profileImageUrl = String()
         let ref = Database.database().reference()
         ref.child("users").child(uID).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary
             username = value?["username"] as! String
+            profileImageUrl = value?["profileImageURL"] as! String
             let newPostID = self.postRef.childByAutoId().key
             let newPostRef = self.postRef.child(newPostID)
-            newPostRef.setValue(["post_key": newPostID, "users": [username], "comments": [comment], "comment_count": 1, "photo_url": photoUrl, "like_count": 0, "likes": [uID: false]]) { (error, ref) in
+            newPostRef.setValue(["post_key": newPostID, "profile_urls": [profileImageUrl], "users": [username], "comments": [comment], "comment_count": 1, "photo_url": photoUrl, "like_count": 0, "likes": [uID: false]]) { (error, ref) in
                 if error != nil {
                     onError(error?.localizedDescription)
                     return
@@ -178,5 +195,35 @@ class DAO {
         }) { (error) in
             print(error.localizedDescription)
         }
+    }
+    
+    // MARK: Methods for TableViewVC
+    func loadProfileImages(onCompeltion: @escaping () -> Void) {
+        let profileUrls = posts[selectedItemIndex].profileImageUrls
+        for profileUrl in profileUrls {
+            let url = URL(string: profileUrl)
+            Alamofire.request(url!).response { response in // method defaults to `.get`
+                if let data = response.data {
+                    if let photo = UIImage(data: data) {
+                        // Add photo to cache.
+                        let photoToCache = photo
+                        self.profilePhotoCache.setObject(photoToCache, forKey: profileUrl as AnyObject)
+                    }
+                }
+                onCompeltion()
+            }
+        }
+    }
+    
+    func loadPhotosFromCache(onCompeltion: @escaping () -> Void) {
+        posts[selectedItemIndex].profileImages.removeAll()
+        let profileUrls = posts[selectedItemIndex].profileImageUrls
+        for profileUrl in profileUrls {
+            // Load photo from cache if it is there.
+            if let photoFromCache = profilePhotoCache.object(forKey: profileUrl as AnyObject) as? UIImage {
+                posts[selectedItemIndex].profileImages.append(photoFromCache)
+            }
+        }
+        onCompeltion()
     }
 }

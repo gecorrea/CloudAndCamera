@@ -14,6 +14,9 @@
 		AA57362F1EE861670076D64A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA57362E1EE861670076D64A /* AppDelegate.swift */; };
 		AA5736361EE861670076D64A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA5736351EE861670076D64A /* Assets.xcassets */; };
 		AA67907C1EEB41D500369BF4 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA67907B1EEB41D500369BF4 /* CustomTableViewCell.swift */; };
+		AA954CD01F01558800CB12EC /* TableView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA954CCF1F01558800CB12EC /* TableView.storyboard */; };
+		AA954CD21F0155D900CB12EC /* TableViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA954CD11F0155D900CB12EC /* TableViewVC.swift */; };
+		AA954CD61F016DA100CB12EC /* CustomDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA954CD51F016DA100CB12EC /* CustomDetailTableViewCell.swift */; };
 		AA9765201EEF292000BBC54B /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA97651F1EEF292000BBC54B /* SignInVC.swift */; };
 		AA9765221EEF2E2500BBC54B /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9765211EEF2E2500BBC54B /* SignUpVC.swift */; };
 		AA9765271EF03B8600BBC54B /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA9765261EF03B8600BBC54B /* Home.storyboard */; };
@@ -32,7 +35,6 @@
 		AAF269561EF816D1001A8037 /* Share.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAB1829C1EF3244B002FB431 /* Share.storyboard */; };
 		AAF269571EF816D7001A8037 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5736371EE861670076D64A /* LaunchScreen.storyboard */; };
 		ED870CB01F001E7F00504CC5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED870CAF1F001E7F00504CC5 /* GoogleService-Info.plist */; };
-		ED870CB21F0050DF00504CC5 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED870CB11F0050DF00504CC5 /* Comment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,9 @@
 		AA5736381EE861670076D64A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA57363A1EE861670076D64A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA67907B1EEB41D500369BF4 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		AA954CCF1F01558800CB12EC /* TableView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TableView.storyboard; sourceTree = "<group>"; };
+		AA954CD11F0155D900CB12EC /* TableViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewVC.swift; sourceTree = "<group>"; };
+		AA954CD51F016DA100CB12EC /* CustomDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDetailTableViewCell.swift; sourceTree = "<group>"; };
 		AA97651F1EEF292000BBC54B /* SignInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		AA9765211EEF2E2500BBC54B /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		AA9765241EF0377F00BBC54B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Start.storyboard; sourceTree = "<group>"; };
@@ -67,7 +72,6 @@
 		AACBCB9D1EE897DB006B80AD /* LibraryAndCameraVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAndCameraVC.swift; sourceTree = "<group>"; };
 		B097F1717F39674242BA5F52 /* Pods_CloudAndCamera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloudAndCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED870CAF1F001E7F00504CC5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		ED870CB11F0050DF00504CC5 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,10 +124,7 @@
 		AA57362D1EE861670076D64A /* CloudAndCamera */ = {
 			isa = PBXGroup;
 			children = (
-				AA57362E1EE861670076D64A /* AppDelegate.swift */,
-				AAB1828E1EF1EB68002FB431 /* Config.swift */,
-				AAB1828C1EF1D992002FB431 /* AuthServices.swift */,
-				AA45E7771EF9CF350079A4E2 /* DAO.swift */,
+				AA954CD71F01BD3F00CB12EC /* Data Handlers */,
 				AAB1829F1EF3333F002FB431 /* Models */,
 				AAB182891EF051C6002FB431 /* ViewControllers */,
 				AAB182881EF051A6002FB431 /* Storyboards */,
@@ -139,6 +140,17 @@
 			path = CloudAndCamera;
 			sourceTree = "<group>";
 		};
+		AA954CD71F01BD3F00CB12EC /* Data Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				AA57362E1EE861670076D64A /* AppDelegate.swift */,
+				AAB1828C1EF1D992002FB431 /* AuthServices.swift */,
+				AAB1828E1EF1EB68002FB431 /* Config.swift */,
+				AA45E7771EF9CF350079A4E2 /* DAO.swift */,
+			);
+			name = "Data Handlers";
+			sourceTree = "<group>";
+		};
 		AAB182881EF051A6002FB431 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +160,7 @@
 				AAB182961EF2E9EE002FB431 /* Detail.storyboard */,
 				AA9765281EF03D2700BBC54B /* Camera.storyboard */,
 				AAB1829C1EF3244B002FB431 /* Share.storyboard */,
+				AA954CCF1F01558800CB12EC /* TableView.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -161,6 +174,7 @@
 				AAB1829A1EF3186D002FB431 /* ShareVC.swift */,
 				AA97651F1EEF292000BBC54B /* SignInVC.swift */,
 				AA9765211EEF2E2500BBC54B /* SignUpVC.swift */,
+				AA954CD11F0155D900CB12EC /* TableViewVC.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -168,8 +182,8 @@
 		AAB1829F1EF3333F002FB431 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				ED870CB11F0050DF00504CC5 /* Comment.swift */,
 				AA3E96691EE9E7A00094EA9E /* CustomCell.swift */,
+				AA954CD51F016DA100CB12EC /* CustomDetailTableViewCell.swift */,
 				AA67907B1EEB41D500369BF4 /* CustomTableViewCell.swift */,
 				AA05B4501EFD4C46008D066F /* Post.swift */,
 			);
@@ -244,6 +258,7 @@
 				AAF269561EF816D1001A8037 /* Share.storyboard in Resources */,
 				AAF269551EF816CB001A8037 /* Camera.storyboard in Resources */,
 				AAF269541EF816C6001A8037 /* Main.storyboard in Resources */,
+				AA954CD01F01558800CB12EC /* TableView.storyboard in Resources */,
 				AAF269531EF816BE001A8037 /* Start.storyboard in Resources */,
 				AAB182941EF2D7EA002FB431 /* ProgressHUD.bundle in Resources */,
 				AAB182971EF2E9EE002FB431 /* Detail.storyboard in Resources */,
@@ -316,9 +331,10 @@
 				AAB1828F1EF1EB68002FB431 /* Config.swift in Sources */,
 				AACBCB9A1EE897AA006B80AD /* CollectionVC.swift in Sources */,
 				AAB182951EF2D7EA002FB431 /* ProgressHUD.m in Sources */,
+				AA954CD21F0155D900CB12EC /* TableViewVC.swift in Sources */,
 				AAB1828D1EF1D992002FB431 /* AuthServices.swift in Sources */,
+				AA954CD61F016DA100CB12EC /* CustomDetailTableViewCell.swift in Sources */,
 				AA05B4511EFD4C46008D066F /* Post.swift in Sources */,
-				ED870CB21F0050DF00504CC5 /* Comment.swift in Sources */,
 				AACBCB9E1EE897DB006B80AD /* LibraryAndCameraVC.swift in Sources */,
 				AA3E966A1EE9E7A00094EA9E /* CustomCell.swift in Sources */,
 				AA57362F1EE861670076D64A /* AppDelegate.swift in Sources */,

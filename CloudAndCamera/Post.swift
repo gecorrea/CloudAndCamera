@@ -2,6 +2,8 @@ import Foundation
 
 class Post{
     var postKey: String
+    var profileImageUrls = Array<String>()
+    var profileImages = Array<UIImage?>()
     var users = Array<String>()
     var comments = Array<String>()
     var commentCount = Int()
@@ -12,8 +14,9 @@ class Post{
     var likelabel = false
     
     
-    init(postKey: String, usersArray: [String], commentsArray: [String], commentCount: Int, likeCount: Int, photoUrl: String) {
+    init(postKey: String, profileImageUrlsArray: [String], usersArray: [String], commentsArray: [String], commentCount: Int, likeCount: Int, photoUrl: String) {
         self.postKey = postKey
+        profileImageUrls.append(contentsOf: profileImageUrlsArray)
         users.append(contentsOf: usersArray)
         comments.append(contentsOf: commentsArray)
         self.commentCount = commentCount

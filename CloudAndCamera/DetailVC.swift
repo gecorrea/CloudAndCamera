@@ -12,6 +12,7 @@ class DetailVC: UIViewController {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var likesLabel: UILabel!
     @IBOutlet weak var commentView: UIView!
+    @IBOutlet weak var deleteButton: UIButton!
     let dataManager = DAO.sharedInstance
     
     override func viewDidLoad() {
@@ -19,10 +20,14 @@ class DetailVC: UIViewController {
         self.view.bringSubview(toFront: commentView)
         imageView.image = detailImage
         commentTextField.delegate = self
-        tableView.delegate = self
         tableView.dataSource = self
+        tableView.allowsSelection = false
         setNumberOfLikesText()
-        dataManager.getCurrentUser()
+        dataManager.getCurrentUser {self.statusOfDeleteButton()}
+    }
+    
+    func statusOfDeleteButton() {
+        deleteButton.isEnabled  = dataManager.posts[dataManager.selectedItemIndex].users.first == dataManager.currentUser ? true : false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,29 +76,47 @@ class DetailVC: UIViewController {
             }
         }
         self.view.endEditing(true)
+        commentTextField.text = ""
     }
+    
+    @IBAction func commentsButtonPushed(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Detail", bundle: nil)
+        let tableViewVC = storyboard.instantiateViewController(withIdentifier: "TableViewVC") as! TableViewVC
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        backItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        navigationItem.backBarButtonItem = backItem
+        navigationController?.pushViewController(tableViewVC, animated: true)
+    }
+    
+    @IBAction func deleteButtonPushed(_ sender: UIButton) {
+        let deleteAlert = UIAlertController(title: "Delete Photo", message: "Are you sure you want to delete this post? This action cannot be undone.", preferredStyle: .actionSheet)
+        
+        deleteAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
+            self.dataManager.deletePost {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }))
+        
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+        }))
+        
+        present(deleteAlert, animated: true, completion: nil)
+    }
+    
 }
 
 extension DetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
         return dataManager.posts[dataManager.selectedItemIndex].commentCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CustomTableViewCell
-        
-        cell.userName.text = dataManager.posts[dataManager.selectedItemIndex].users[indexPath.section]
-        cell.comment.text = dataManager.posts[dataManager.selectedItemIndex].comments[indexPath.section]
+        cell.userName.text = dataManager.posts[dataManager.selectedItemIndex].users[indexPath.row]
+        cell.comment.text = dataManager.posts[dataManager.selectedItemIndex].comments[indexPath.row]
         return cell
     }
-}
-
-extension DetailVC: UITableViewDelegate {
-    
 }
 
 extension DetailVC: UITextFieldDelegate {
