@@ -32,6 +32,7 @@
 		AAF269561EF816D1001A8037 /* Share.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAB1829C1EF3244B002FB431 /* Share.storyboard */; };
 		AAF269571EF816D7001A8037 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5736371EE861670076D64A /* LaunchScreen.storyboard */; };
 		ED870CB01F001E7F00504CC5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED870CAF1F001E7F00504CC5 /* GoogleService-Info.plist */; };
+		ED870CB21F0050DF00504CC5 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED870CB11F0050DF00504CC5 /* Comment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		AACBCB9D1EE897DB006B80AD /* LibraryAndCameraVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAndCameraVC.swift; sourceTree = "<group>"; };
 		B097F1717F39674242BA5F52 /* Pods_CloudAndCamera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloudAndCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED870CAF1F001E7F00504CC5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ED870CB11F0050DF00504CC5 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 		AAB1829F1EF3333F002FB431 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				ED870CB11F0050DF00504CC5 /* Comment.swift */,
 				AA3E96691EE9E7A00094EA9E /* CustomCell.swift */,
 				AA67907B1EEB41D500369BF4 /* CustomTableViewCell.swift */,
 				AA05B4501EFD4C46008D066F /* Post.swift */,
@@ -315,6 +318,7 @@
 				AAB182951EF2D7EA002FB431 /* ProgressHUD.m in Sources */,
 				AAB1828D1EF1D992002FB431 /* AuthServices.swift in Sources */,
 				AA05B4511EFD4C46008D066F /* Post.swift in Sources */,
+				ED870CB21F0050DF00504CC5 /* Comment.swift in Sources */,
 				AACBCB9E1EE897DB006B80AD /* LibraryAndCameraVC.swift in Sources */,
 				AA3E966A1EE9E7A00094EA9E /* CustomCell.swift in Sources */,
 				AA57362F1EE861670076D64A /* AppDelegate.swift in Sources */,

@@ -22,6 +22,7 @@ class DetailVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         setNumberOfLikesText()
+        dataManager.getCurrentUser()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,24 +58,36 @@ class DetailVC: UIViewController {
         dataManager.posts[dataManager.selectedItemIndex].likelabel == true ? likeButton.setImage(UIImage(named: "active_like"), for: .normal) : likeButton.setImage(UIImage(named: "icn_like"), for: .normal)
         likesLabel.text = dataManager.posts[dataManager.selectedItemIndex].likeCount == 1 ? "\(dataManager.posts[dataManager.selectedItemIndex].likeCount) like" : "\(dataManager.posts[dataManager.selectedItemIndex].likeCount) likes"
     }
+
+    @IBAction func sendButtonPushed(_ sender: UIButton) {
+        let validateText = commentTextField.text?.replacingOccurrences(of: " ", with: "")
+        if validateText == "" {
+            ProgressHUD.showError("Comment must contain atleast one character that is not a space.")
+        } else {
+            if let postText = commentTextField.text{
+                dataManager.postComment(user: dataManager.currentUser,userPost: postText, onCompletion: {
+                    self.tableView.reloadData()
+                })
+            }
+        }
+        self.view.endEditing(true)
+    }
 }
 
 extension DetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return dataManager.posts[dataManager.selectedItemIndex].commentCount
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CustomTableViewCell
-//        if dataManager.numberOfComments == 0 {
-            cell.userName.text = dataManager.posts[dataManager.selectedItemIndex].user
-            cell.comment.text = dataManager.posts[dataManager.selectedItemIndex].caption
-//            dataManager.numberOfComments += 1
-//        }
-//        else {
-//            
-//        }
         
+        cell.userName.text = dataManager.posts[dataManager.selectedItemIndex].users[indexPath.section]
+        cell.comment.text = dataManager.posts[dataManager.selectedItemIndex].comments[indexPath.section]
         return cell
     }
 }

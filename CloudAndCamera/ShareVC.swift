@@ -39,8 +39,8 @@ class ShareVC: UIViewController {
                 ProgressHUD.showError(error!)
             }, onSuccess: { (metadata) in
                 if let photoUrl = metadata.downloadURL()?.absoluteString,
-                    let caption = self.captionTextView.text {
-                    self.dataManager.sendDataToDatabase(photoUrl: photoUrl, caption: caption, onSuccess: {
+                    let comment = self.captionTextView.text {
+                    self.dataManager.sendDataToDatabase(photoUrl: photoUrl, comment: comment, onSuccess: {
                         ProgressHUD.showSuccess("Thanks for sharing a post!")
                         self.shareImage = nil
                         self.navigationController?.popViewController(animated: true)
