@@ -42,13 +42,13 @@ class DAO {
         }
     }
     
-    func loadImagePosts(onSuccess: @escaping () -> Void) {
+    func loadImagePosts(onCompletion: @escaping () -> Void) {
         for post in posts {
             let url = URL(string: post.photoUrl)
             // Load photo from cache if it is there.
             if let photoFromCache = photoCache.object(forKey: post.photoUrl as AnyObject) as? UIImage {
                 post.myImage = photoFromCache
-                onSuccess()
+                onCompletion()
             }
             Alamofire.request(url!).response { response in // method defaults to `.get`
                 if let data = response.data {
@@ -59,7 +59,7 @@ class DAO {
                         post.myImage = photoToCache
                     }
                 }
-                onSuccess()
+                onCompletion()
             }
         }
     }
