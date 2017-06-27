@@ -49,6 +49,8 @@ class LibraryAndCameraVC: UIViewController {
     @IBAction func libraryButtonPushed(_ sender: UIButton) {
         picker.allowsEditing = false
         picker.sourceType = .photoLibrary
+        let appDel = AppDelegate()
+        picker.navigationBar.barTintColor = appDel.hexStringToUIColor(hex: "707191")
         present(picker, animated: true, completion: nil)
     }
 

@@ -27,7 +27,7 @@ class DetailVC: UIViewController {
     }
     
     func statusOfDeleteButton() {
-        deleteButton.isEnabled  = dataManager.posts[dataManager.selectedItemIndex].users.first == dataManager.currentUser ? true : false
+        deleteButton.isHidden  = dataManager.posts[dataManager.selectedItemIndex].users.first != dataManager.currentUser ? true : false
     }
     
     override func viewWillAppear(_ animated: Bool) {
