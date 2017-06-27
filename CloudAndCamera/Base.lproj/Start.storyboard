@@ -50,8 +50,10 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="iwK-lL-bLz"/>
                                         </constraints>
+                                        <size key="titleShadowOffset" width="1" height="1"/>
                                         <state key="normal" title="Sign In">
                                             <color key="titleColor" red="0.99049308158005034" green="1" blue="0.9787908568710213" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="signIn:" destination="Iq8-gN-ki3" eventType="touchUpInside" id="VFo-D7-Z8C"/>
@@ -64,30 +66,38 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="1Bk-ru-eYC"/>
                                 </constraints>
+                                <size key="titleShadowOffset" width="1" height="1"/>
                                 <state key="normal" title="Don't have an account? Sign Up.">
                                     <color key="titleColor" red="0.99049308158005034" green="1" blue="0.9787908568710213" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
                                     <segue destination="WCf-oU-cZT" kind="presentation" id="XdQ-88-1Fg"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloud" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PqI-E6-ZVR">
-                                <rect key="frame" x="36" y="111" width="105.5" height="38"/>
+                                <rect key="frame" x="36" y="111" width="106.5" height="39"/>
                                 <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <size key="shadowOffset" width="1" height="1"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="And" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UDa-cZ-Y6S">
-                                <rect key="frame" x="159.5" y="152" width="56.5" height="32"/>
+                                <rect key="frame" x="159" y="153" width="57.5" height="33"/>
                                 <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <size key="shadowOffset" width="1" height="1"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lm6-ml-Ib1">
-                                <rect key="frame" x="209" y="193" width="130" height="38"/>
+                                <rect key="frame" x="208" y="195" width="131" height="39"/>
                                 <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <size key="shadowOffset" width="1" height="1"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.52241150149064897" green="0.90047142384855128" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -166,8 +176,10 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="hxC-dv-JoJ"/>
                                         </constraints>
+                                        <size key="titleShadowOffset" width="1" height="1"/>
                                         <state key="normal" title="Sign Up">
                                             <color key="titleColor" red="0.99049308160000005" green="1" blue="0.97879085690000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
                                         <connections>
                                             <action selector="signUp:" destination="WCf-oU-cZT" eventType="touchUpInside" id="15k-GV-JjW"/>
@@ -180,14 +192,16 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="PUm-M2-VrS"/>
                                 </constraints>
+                                <size key="titleShadowOffset" width="1" height="1"/>
                                 <state key="normal" title="Already have an account? Sign In.">
                                     <color key="titleColor" red="0.99049308160000005" green="1" blue="0.97879085690000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
                                     <action selector="alreadyUser:" destination="WCf-oU-cZT" eventType="touchUpInside" id="XMl-Vk-TB4"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="users_2" translatesAutoresizingMaskIntoConstraints="NO" id="Tau-85-oqe">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_user" translatesAutoresizingMaskIntoConstraints="NO" id="Tau-85-oqe">
                                 <rect key="frame" x="137" y="74" width="100" height="100"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
@@ -232,9 +246,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="users_2" width="128" height="128"/>
+        <image name="default_user" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OkL-sL-i34"/>
+        <segue reference="6Gf-3N-NxV"/>
     </inferredMetricsTieBreakers>
 </document>
