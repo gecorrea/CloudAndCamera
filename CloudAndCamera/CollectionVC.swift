@@ -19,7 +19,7 @@ class CollectionVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         dataManager.posts.removeAll()
         dataManager.retrieveComments {
-            self.dataManager.loadImagePosts(onSuccess: {
+            self.dataManager.loadImagePosts(onCompletion: {
                 self.collectionView.reloadData()
             })
         }
